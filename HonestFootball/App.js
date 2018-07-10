@@ -14,24 +14,24 @@ import {
 import Comment from './comment'
 import TimerMixin from 'react-timer-mixin'
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
-
 type Props = {};
 export default class App extends Component<Props> {
   render() {
     return (
-      <Comment commentText="Jeffs"/>
+      <Comment />
     );
   }
 }
 
-// componentDidMount() {
-// setInterval(() => {console.log('Jim Baxters armpits')}, 5000)
+// function getFeed() {
+//   return fetch('http://honest-apps.eu-west-1.elasticbeanstalk.com/api/feed/9815')
+//     .then((response) => response.json())
+//     .then((responseJson) => {
+//       return responseJson.movies;
+//     })
+//     .catch((error) => {
+//       console.error(error);
+//     });
 // }
 
 const styles = StyleSheet.create({
