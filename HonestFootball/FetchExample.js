@@ -1,7 +1,8 @@
+
 import React from 'react';
 import { FlatList, ActivityIndicator, Text, View  } from 'react-native';
 
-export default class Comment extends React.Component {
+export default class FetchExample extends React.Component {
 
   constructor(props){
     super(props);
@@ -9,13 +10,13 @@ export default class Comment extends React.Component {
   }
 
   componentDidMount(){
-    return fetch('http://honest-apps.eu-west-1.elasticbeanstalk.com/api/feed/9815')
+    return fetch('https://facebook.github.io/react-native/movies.json')
       .then((response) => response.json())
       .then((responseJson) => {
 
         this.setState({
           isLoading: false,
-          dataSource: responseJson.Matches,
+          dataSource: responseJson.movies,
         }, function(){
 
         });
@@ -25,6 +26,8 @@ export default class Comment extends React.Component {
         console.error(error);
       });
   }
+
+
 
   render(){
 
@@ -40,8 +43,8 @@ export default class Comment extends React.Component {
       <View style={{flex: 1, paddingTop:20}}>
         <FlatList
           data={this.state.dataSource}
-          renderItem={({item}) => <Text>{item.HomeComment}</Text>}
-          //keyExtractor={(item, index) => index}
+          renderItem={({item}) => <Text>{item.title}, {item.releaseYear}</Text>}
+          keyExtractor={(item, index) => index}
         />
       </View>
     );

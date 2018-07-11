@@ -12,6 +12,7 @@ import {
   View
 } from 'react-native';
 import Comment from './comment'
+import FetchExample from './FetchExample'
 import TimerMixin from 'react-timer-mixin'
 
 type Props = {};
@@ -19,6 +20,7 @@ export default class App extends Component<Props> {
   render() {
     return (
       <Comment />
+      //<FetchExample />
     );
   }
 }
