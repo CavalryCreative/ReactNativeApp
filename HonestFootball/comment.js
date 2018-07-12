@@ -37,12 +37,8 @@ export default class Comment extends React.Component {
     }
 
     return(
-      <View style={{flex: 1, paddingTop:20}}>
-        <FlatList
-          data={this.state.dataSource}
-          renderItem={({item}) => <Text>{item.HomeComment}</Text>}
-          //keyExtractor={(item, index) => index}
-        />
+      <View style={{flex: 1, paddingTop:20}}>      
+        <Text>Jeff</Text>
       </View>
     );
   }
