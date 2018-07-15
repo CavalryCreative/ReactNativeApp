@@ -27,8 +27,6 @@ export default class FetchExample extends React.Component {
       });
   }
 
-
-
   render(){
 
     if(this.state.isLoading){
