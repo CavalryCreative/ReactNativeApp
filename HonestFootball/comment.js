@@ -33,11 +33,12 @@ export default class Comment extends React.Component {
 // }
 
  //this.timer = setInterval(()=> this.loadFeed(), 60000)
+ //https://facebook.github.io/react-native/movies.json
  componentWillMount() {
-    fetch('https://facebook.github.io/react-native/movies.json')
+    fetch('http://honest-apps.eu-west-1.elasticbeanstalk.com/api/feed/9815')
       .then((response) => response.json())
       .then((responseJson) => {
-        this.setState({ dataSource: ds.cloneWithRows(responseJson.movies) });
+        this.setState({ dataSource: ds.cloneWithRows(responseJson.Matches) });
       })
       .catch((error) => {
         console.error(error);
@@ -58,7 +59,7 @@ export default class Comment extends React.Component {
         <View>
           <ListView
             dataSource={this.state.dataSource}
-            renderRow={(rowData) => <Text>{rowData.title}</Text>}
+            renderRow={(rowData) => <Text>{rowData.HomeComment}</Text>}
           />
         </View>
       );
