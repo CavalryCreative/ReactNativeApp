@@ -13,53 +13,43 @@ export default class Comment extends React.Component {
     };
   }
 
-// loadFeed(){
-//   //http://honest-apps.eu-west-1.elasticbeanstalk.com/api/feed/9815
-//  return fetch('https://facebook.github.io/react-native/movies.json')
-//       .then((response) => response.json())
-//       .then((responseJson) => {
-
-//         this.setState({
-//           isLoading: false,
-//           dataSource: ds.cloneWithRows(responseJson.movies) 
-//           }
-//         }, function(){
-
-//         });
-//       })
-//       .catch((error) =>{
-//         console.error(error);
-//       });
-// }
-
- //this.timer = setInterval(()=> this.loadFeed(), 60000)
- //https://facebook.github.io/react-native/movies.json
- componentWillMount() {
-    fetch('http://honest-apps.eu-west-1.elasticbeanstalk.com/api/feed/9815')
+loadFeed(){
+  //http://honest-apps.eu-west-1.elasticbeanstalk.com/api/feed/9815
+ return fetch('http://honest-apps.eu-west-1.elasticbeanstalk.com/api/feed/9815')
       .then((response) => response.json())
       .then((responseJson) => {
-        this.setState({ dataSource: ds.cloneWithRows(responseJson.Matches) });
+        this.setState({ 
+          isLoading: false,
+          dataSource: ds.cloneWithRows(responseJson.Matches) 
+        });
       })
       .catch((error) => {
         console.error(error);
       });
+}
+
+ //this.timer = setInterval(()=> this.loadFeed(), 60000)
+ //https://facebook.github.io/react-native/movies.json
+ componentWillMount() {
+    this.timer = setInterval(()=> this.loadFeed(), 5000)
   }
 
   render(){
 
-    // if(this.state.isLoading){
-    //   return(
-    //     <View style={{flex: 1, padding: 20}}>
-    //       <ActivityIndicator/>
-    //     </View>
-    //   )
-    // }
+    if(this.state.isLoading){
+      return(
+        <View style={{flex: 1, padding: 20}}>
+          <ActivityIndicator/>
+        </View>
+      )
+    }
 
      return (
         <View>
-          <ListView
-            dataSource={this.state.dataSource}
-            renderRow={(rowData) => <Text>{rowData.HomeComment}</Text>}
+
+          <FlatList
+            data={this.state.dataSource}
+            renderItem={(rowData) => <Text>{rowData.LatestEvent.HomeComment}</Text>}
           />
         </View>
       );
