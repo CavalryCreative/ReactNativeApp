@@ -51,7 +51,7 @@ loadFeed(){
         <View>
            <FlatList
             data={this.state.dataSource}
-            renderItem={({item}) => <Text>{item.LatestEvent.HomeComment}</Text>}
+            renderItem={({item}) => <Text>{item.LatestEvent.HomeComment}{item.LatestEvent.Score}</Text>}
             keyExtractor={(item, index) => index}
           />
         </View>
