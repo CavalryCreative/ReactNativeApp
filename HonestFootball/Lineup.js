@@ -3,7 +3,7 @@ import { FlatList, ActivityIndicator, Text, View, ListView  } from 'react-native
 
 //var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
-export default class Comment extends React.Component {
+export default class Lineup extends React.Component {
 
   constructor(props){
     super(props);
@@ -13,7 +13,7 @@ export default class Comment extends React.Component {
   }
 
 loadFeed(){
-  //http://honest-apps.eu-west-1.elasticbeanstalk.com/api/feed/9815
+  
   return fetch('http://honest-apps.eu-west-1.elasticbeanstalk.com/api/feed/9815')
       .then((response) => response.json())
       .then((responseJson) => {
@@ -31,8 +31,6 @@ loadFeed(){
       });
 }
 
- //this.timer = setInterval(()=> this.loadFeed(), 60000)
- //https://facebook.github.io/react-native/movies.json
  componentWillMount() {
     this.timer = setInterval(()=> this.loadFeed(), 1000)
   }
@@ -51,7 +49,7 @@ loadFeed(){
         <View>
            <FlatList
             data={this.state.dataSource}
-            renderItem={({item}) => <Text>{item.LatestEvent.HomeComment}</Text>}
+            renderItem={({item}) => <Text>{item.HomeLineUp.PlayerSurname}</Text>}
             keyExtractor={(item, index) => index}
           />
         </View>

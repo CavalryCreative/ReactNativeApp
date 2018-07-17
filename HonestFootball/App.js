@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import Comment from './comment'
 import FetchExample from './FetchExample'
+import Lineup from './Lineup'
 import TimerMixin from 'react-timer-mixin'
 
 type Props = {};
@@ -20,6 +21,7 @@ export default class App extends Component<Props> {
   render() {
     return (
       <Comment />
+      //<Lineup />
       //<FetchExample />
     );
   }
