@@ -49,6 +49,7 @@ loadFeed(){
 
      return (
         <View>
+        <Text value={({item}) => {item.LatestEvent.AwayComment}}></Text>
            <FlatList
             data={this.state.dataSource}
             renderItem={({item}) => <Text>{item.LatestEvent.HomeComment}{item.LatestEvent.Score}</Text>}
