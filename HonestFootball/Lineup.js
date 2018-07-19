@@ -32,7 +32,7 @@ loadFeed(){
 }
 
  componentWillMount() {
-    this.timer = setInterval(()=> this.loadFeed(), 1000)
+    this.timer = setInterval(()=> this.loadFeed(), 5000)
   }
 
   render(){

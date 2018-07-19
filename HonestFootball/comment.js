@@ -24,13 +24,9 @@ loadFeed(){
         this.setState({
           isLoading: false,
           dataSource: responseJson.Matches,
-          LatestEvent: responseJson.Matches.LatestEvent
-          //HomeComment: responseJson.Matches.LatestEvent.HomeComment,
-          // AwayComment: responseJson.Matches.LatestEvent.AwayComment,
-          // Score: responseJson.Matches.LatestEvent.Score
-          // HomeComment: responseJson['Matches']['LatestEvent']['HomeComment'],
-          // AwayComment: responseJson['Matches']['LatestEvent']['AwayComment'],
-          // Score: responseJson['Matches']['LatestEvent']['Score']
+          HomeComment: responseJson.Matches[0].LatestEvent.HomeComment,
+          AwayComment: responseJson.Matches[0].LatestEvent.AwayComment,
+          Score: responseJson.Matches[0].LatestEvent.Score
         }, function(){
 
         });
@@ -41,10 +37,8 @@ loadFeed(){
       });
 }
 
- //this.timer = setInterval(()=> this.loadFeed(), 60000)
- //https://facebook.github.io/react-native/movies.json
  componentWillMount() {
-    this.timer = setInterval(()=> this.loadFeed(), 1000)
+    this.timer = setInterval(()=> this.loadFeed(), 5000)
   }
 
   render(){
@@ -59,14 +53,9 @@ loadFeed(){
 
      return (
         <View>
-         <Text>{this.state.LatestEvent[0].HomeComment}</Text>
-         <Text>{this.state.Score}</Text>
-
-           <FlatList
-            data={this.state.dataSource}
-            renderItem={({item}) => <Text>{item.LatestEvent.HomeComment}{item.LatestEvent.Score}</Text>}
-            keyExtractor={(item, index) => index}
-          />
+          <Text>{this.state.HomeComment}</Text>
+          <Text>{this.state.AwayComment}</Text>
+          <Text>{this.state.Score}</Text>
         </View>
       );
   }
