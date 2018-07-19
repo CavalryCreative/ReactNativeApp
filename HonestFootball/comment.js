@@ -8,7 +8,10 @@ export default class Comment extends React.Component {
   constructor(props){
     super(props);
     this.state ={ 
-      isLoading: true
+      isLoading: true,
+      HomeComment: '',
+      AwayComment: '',
+      Score: ''
     };
   }
 
@@ -21,6 +24,13 @@ loadFeed(){
         this.setState({
           isLoading: false,
           dataSource: responseJson.Matches,
+          LatestEvent: responseJson.Matches.LatestEvent
+          //HomeComment: responseJson.Matches.LatestEvent.HomeComment,
+          // AwayComment: responseJson.Matches.LatestEvent.AwayComment,
+          // Score: responseJson.Matches.LatestEvent.Score
+          // HomeComment: responseJson['Matches']['LatestEvent']['HomeComment'],
+          // AwayComment: responseJson['Matches']['LatestEvent']['AwayComment'],
+          // Score: responseJson['Matches']['LatestEvent']['Score']
         }, function(){
 
         });
@@ -49,7 +59,9 @@ loadFeed(){
 
      return (
         <View>
-        <Text value={({item}) => {item.LatestEvent.AwayComment}}></Text>
+         <Text>{this.state.LatestEvent[0].HomeComment}</Text>
+         <Text>{this.state.Score}</Text>
+
            <FlatList
             data={this.state.dataSource}
             renderItem={({item}) => <Text>{item.LatestEvent.HomeComment}{item.LatestEvent.Score}</Text>}
