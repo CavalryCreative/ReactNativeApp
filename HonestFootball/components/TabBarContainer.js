@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet  } from 'react-native';
 import Tabs from 'react-native-tabs'
+import TabBarItem from './TabBarItem'
 
 export default class TabBarContainer extends React.Component {
 
@@ -14,10 +15,10 @@ export default class TabBarContainer extends React.Component {
   render(){
 
      return (
-        <Tabs style='styles.tabContainer'>
-	     	<Text>Comments</Text>
-	     	<Text>Lineups</Text>
-	     	<Text>Fixtures</Text>
+        <Tabs style={styles.tabContainer}>
+  	     	<Text>Comments</Text>
+  	     	<Text>Lineups</Text>
+  	     	<Text>Fixtures</Text>
 	     </Tabs>
       );
   }
@@ -25,7 +26,7 @@ export default class TabBarContainer extends React.Component {
 
 const styles = StyleSheet.create({
   tabContainer: {
-    //flex: 1,
+    flex: 1,
     backgroundColor: '#343434',
     borderTopWidth: 1,
     borderTopColor: '#262626',

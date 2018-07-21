@@ -11,21 +11,24 @@ import {
   Text,
   View
 } from 'react-native';
+import RSwiper from './components/MultiSwiper';
+
 import routes from './routes'
 import Comment from './components/comment'
 import Lineup from './components/Lineup'
-import TimerMixin from 'react-timer-mixin'
 import TabBarContainer from './components/TabBarContainer'
 
 type Props = {};
 export default class App extends Component<Props> {
   render() {
     return (
-      <View>
-       <TabBarContainer />
-        <Comment />
-         
-      </View>
+     
+     
+        <RSwiper />
+      
+      //  <Comment />
+       //<TabBarContainer />
+          //<Comment />
       //<Lineup />
       //<FetchExample />
     );
