@@ -16,15 +16,30 @@ export default class RSwiper extends React.Component {
 
      return (     
     
-      <Swiper style={styles.wrapper} showsButtons={true}>
+      <Swiper style={styles.wrapper} showsButtons={false} 
+        loop={false}
+        showsPagination={false}
+        index={1}>
         <View style={styles.slide1}>
-          <Text style={styles.text}>Hello Swiper</Text>
+          <Text style={styles.text}>Left</Text>
         </View>
-        <View style={styles.slide2}>
-          <Text style={styles.text}>Beautiful</Text>
-        </View>
+        <Swiper
+          horizontal={false}
+          loop={false}
+          showsPagination={false}
+          index={1}>
+          <View style={styles.slide1}>
+            <Text style={styles.text}>Top</Text>
+          </View>
+          <View style={styles.slide2}>
+            <Text style={styles.text}>Home</Text>
+          </View>
+          <View style={styles.slide3}>
+            <Text style={styles.text}>Bottom</Text>
+          </View>
+        </Swiper>              
         <View style={styles.slide3}>
-          <Text style={styles.text}>And simple</Text>
+          <Text style={styles.text}>Right</Text>
         </View>
       </Swiper>      
       );
@@ -56,5 +71,10 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 30,
     fontWeight: 'bold',
+  },
+  viewStyle:{
+     flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
   },
 });
