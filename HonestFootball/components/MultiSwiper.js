@@ -21,7 +21,7 @@ export default class RSwiper extends React.Component {
         showsPagination={false}
         index={1}>
         <View style={styles.slide1}>
-          <Text style={styles.text}>Left</Text>
+          <Text style={styles.text}>Settings</Text>
         </View>
         <Swiper
           horizontal={false}
@@ -29,17 +29,17 @@ export default class RSwiper extends React.Component {
           showsPagination={false}
           index={1}>
           <View style={styles.slide1}>
-            <Text style={styles.text}>Top</Text>
+            <Text style={styles.text}>Tabs - line up, table, fixtures</Text>
           </View>
           <View style={styles.slide2}>
-            <Text style={styles.text}>Home</Text>
+            <Text style={styles.text}>Comments - touch for stats</Text>
           </View>
           <View style={styles.slide3}>
-            <Text style={styles.text}>Bottom</Text>
+            <Text style={styles.text}>Share</Text>
           </View>
         </Swiper>              
         <View style={styles.slide3}>
-          <Text style={styles.text}>Right</Text>
+          <Text style={styles.text}>News</Text>
         </View>
       </Swiper>      
       );
