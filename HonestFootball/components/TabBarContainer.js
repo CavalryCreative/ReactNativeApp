@@ -16,10 +16,14 @@ export default class TabBarContainer extends React.Component {
 
      return (
         <Tabs style={styles.tabContainer}>
-  	     	<Text>Comments</Text>
-  	     	<Text>Lineups</Text>
-  	     	<Text>Fixtures</Text>
+         <TabBarItem name="lineup" label="Lineups" icon="" />
+         <TabBarItem name="table" label="Table" icon="" />
+         <TabBarItem name="fixtures" label="Fixtures" icon="" />
+ 	     	
 	     </Tabs>
+       //<TabBarItem name="lineup" label="Lineups" />
+         // <TabBarItem name="table" label="Table" />
+          //<TabBarItem name="fixtures" label="Fixtures" />
       );
   }
 }

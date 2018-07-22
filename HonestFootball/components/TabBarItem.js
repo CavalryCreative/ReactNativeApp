@@ -2,17 +2,15 @@ import React, { Component } from 'react';
 import { Text, View,StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 
-export class TabBarItem extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Icon name={props.icon} style={styles.icon} />
-        <Text style={styles.label}>{props.label}</Text>
-      </View>
-    );
+const TabBarItem = (props) => {
+  return (
+    <View style={styles.container}>
+        <Text style={styles.label}>{props.label}</Text> 
+    </View>
+    //<Icon name={props.icon} style={styles.icon} />   
+    )
   }
-}
-
+    
 TabBarItem.propTypes = {
   label: PropTypes.string.isRequired,
   icon:PropTypes.string,
@@ -38,3 +36,5 @@ const styles = StyleSheet.create({
     color: '#cc9766'
   }
 });
+
+export default TabBarItem;

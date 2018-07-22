@@ -2,6 +2,8 @@ import React from 'react';
 import { StyleSheet, Text, View  } from 'react-native';
 
 import Swiper from 'react-native-swiper';
+import TabBarContainer from './TabBarContainer';
+import Comment from './comment'
 
 export default class RSwiper extends React.Component {
 
@@ -29,9 +31,10 @@ export default class RSwiper extends React.Component {
           showsPagination={false}
           index={1}>
           <View style={styles.slide1}>
-            <Text style={styles.text}>Tabs - line up, table, fixtures</Text>
+            <TabBarContainer />
           </View>
           <View style={styles.slide2}>
+            <Comment />
             <Text style={styles.text}>Comments - touch for stats</Text>
           </View>
           <View style={styles.slide3}>

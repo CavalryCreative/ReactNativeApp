@@ -14,20 +14,54 @@ import {
 import RSwiper from './components/MultiSwiper';
 
 import routes from './routes'
-import Comment from './components/comment'
 import Lineup from './components/Lineup'
-import TabBarContainer from './components/TabBarContainer'
 
 type Props = {};
 export default class App extends Component<Props> {
+
+   constructor(props){
+    super(props);
+    this.state ={ 
+      isLoading: true,
+      HomeComment: '',
+      AwayComment: '',
+      Minute: '',
+      Score: ''
+    };
+  }
+
+  loadFeed(){
+  //http://honest-apps.eu-west-1.elasticbeanstalk.com/api/feed/9815
+  return fetch('http://honest-apps.eu-west-1.elasticbeanstalk.com/api/feed/9815')
+      .then((response) => response.json())
+      .then((responseJson) => {
+
+        this.setState({
+          isLoading: false,
+          dataSource: responseJson.Matches,
+          HomeComment: responseJson.Matches[0].LatestEvent.HomeComment,
+          AwayComment: responseJson.Matches[0].LatestEvent.AwayComment,
+          Minute: responseJson.Matches[0].LatestEvent.Minute,
+          Score: responseJson.Matches[0].LatestEvent.Score
+        }, function(){
+
+        });
+
+      })
+      .catch((error) =>{
+        console.error(error);
+      });
+}
+
+ componentWillMount() {
+    this.timer = setInterval(()=> this.loadFeed(), 5000)
+  }
+  
   render() {
-    return (
-     
-     
+    return (       
+         
         <RSwiper />
-      
-      //  <Comment />
-       //<TabBarContainer />
+       
           //<Comment />
       //<Lineup />
       //<FetchExample />
