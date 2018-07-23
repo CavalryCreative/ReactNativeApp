@@ -4,6 +4,8 @@ import { StyleSheet, Text, View  } from 'react-native';
 import Swiper from 'react-native-swiper';
 import TabBarContainer from './TabBarContainer';
 import Comment from './comment'
+import PropTypes from 'prop-types';
+import LineupsTabView  from './TabView'
 
 export default class RSwiper extends React.Component {
 
@@ -31,7 +33,7 @@ export default class RSwiper extends React.Component {
           showsPagination={false}
           index={1}>
           <View style={styles.slide1}>
-            <TabBarContainer />
+             <LineupsTabView /> 
           </View>
           <View style={styles.slide2}>
             <Comment />
@@ -47,6 +49,11 @@ export default class RSwiper extends React.Component {
       </Swiper>      
       );
   }
+}
+
+RSwiper.propTypes = {
+  selectedLineupTab: PropTypes.array.isRequired,
+  lineupTabs: PropTypes.string.isRequired,
 }
 
 const styles = StyleSheet.create({

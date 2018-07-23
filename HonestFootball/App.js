@@ -15,6 +15,7 @@ import RSwiper from './components/MultiSwiper';
 
 import routes from './routes'
 import Lineup from './components/Lineup'
+import TabView  from './components/TabView'
 
 type Props = {};
 export default class App extends Component<Props> {
@@ -22,6 +23,12 @@ export default class App extends Component<Props> {
    constructor(props){
     super(props);
     this.state ={ 
+      selectedLineupTab: 'lineup',
+      lineupTabs:[
+        {key: 'lineup'},
+        {key: 'table'},
+        {key: 'fixtures'},
+      ],
       isLoading: true,
       HomeComment: '',
       AwayComment: '',
@@ -60,7 +67,10 @@ export default class App extends Component<Props> {
   render() {
     return (       
          
-        <RSwiper />
+         <TabView /> 
+        //<RSwiper 
+          //selectedLineupTab={this.state.selectedLineupTab}
+          //lineupTabs={this.state.lineupTabs}/>
        
           //<Comment />
       //<Lineup />
