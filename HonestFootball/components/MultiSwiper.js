@@ -5,7 +5,7 @@ import Swiper from 'react-native-swiper';
 import TabBarContainer from './TabBarContainer';
 import Comment from './comment'
 import PropTypes from 'prop-types';
-import LineupsTabView  from './TabView'
+import LineupsTabView  from './LineupTabView'
 
 export default class RSwiper extends React.Component {
 
@@ -24,7 +24,7 @@ export default class RSwiper extends React.Component {
         loop={false}
         showsPagination={false}
         index={1}>
-        <View style={styles.slide1}>
+        <View style={styles.slide2}>
           <Text style={styles.text}>Settings</Text>
         </View>
         <Swiper
@@ -51,18 +51,13 @@ export default class RSwiper extends React.Component {
   }
 }
 
-RSwiper.propTypes = {
-  selectedLineupTab: PropTypes.array.isRequired,
-  lineupTabs: PropTypes.string.isRequired,
-}
-
 const styles = StyleSheet.create({
   wrapper: {
   },
  slide1: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    //justifyContent: 'center',
+    //alignItems: 'center',
     backgroundColor: '#9DD6EB',
   },
   slide2: {

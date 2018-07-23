@@ -11,11 +11,9 @@ import {
   Text,
   View
 } from 'react-native';
-import RSwiper from './components/MultiSwiper';
 
+import RSwiper from './components/MultiSwiper';
 import routes from './routes'
-import Lineup from './components/Lineup'
-import TabView  from './components/TabView'
 
 type Props = {};
 export default class App extends Component<Props> {
@@ -67,14 +65,7 @@ export default class App extends Component<Props> {
   render() {
     return (       
          
-         <TabView /> 
-        //<RSwiper 
-          //selectedLineupTab={this.state.selectedLineupTab}
-          //lineupTabs={this.state.lineupTabs}/>
-       
-          //<Comment />
-      //<Lineup />
-      //<FetchExample />
+        <RSwiper />    
     );
   }
 }

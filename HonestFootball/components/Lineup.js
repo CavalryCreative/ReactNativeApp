@@ -20,9 +20,9 @@ loadFeed(){
 
         this.setState({
           isLoading: false,
-          dataSource: responseJson.Matches,
+          dataSource: responseJson.Matches[0],
         }, function(){
-
+console.log(responseJson.Matches[0]);
         });
 
       })
@@ -32,7 +32,8 @@ loadFeed(){
 }
 
  componentWillMount() {
-    this.timer = setInterval(()=> this.loadFeed(), 5000)
+  this.loadFeed();
+    //this.timer = setInterval(()=> this.loadFeed(), 1000)
   }
 
   render(){
@@ -50,7 +51,7 @@ loadFeed(){
            <FlatList
             data={this.state.dataSource}
             renderItem={({item}) => <Text>{item.HomeLineUp.PlayerSurname}</Text>}
-            keyExtractor={(item, index) => index}
+            //keyExtractor={(item, index) => index}
           />
         </View>
       );

@@ -1,15 +1,20 @@
 import * as React from 'react';
-import { View, StyleSheet, Dimensions } from 'react-native';
+import { View, StyleSheet, Dimensions, Text } from 'react-native';
 import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
 
+import Lineup  from './Lineup'
+
 const LineupRoute = () => (
-  <View style={[styles.container, { backgroundColor: '#ff4081' }]} />
+  //<View style={[styles.container, { backgroundColor: '#ff4081' }]} />
+  <Lineup />
 );
 const TableRoute = () => (
-  <View style={[styles.container, { backgroundColor: '#673ab7' }]} />
+  //<View style={[styles.container, { backgroundColor: '#673ab7' }]} />
+  <Text>Jim</Text>
 );
 const FixtureRoute = () => (
-  <View style={[styles.container, { backgroundColor: '#373ab7' }]} />
+  <Text>Bob</Text>
+  //<View style={[styles.container, { backgroundColor: '#373ab7' }]} />
 );
 
 export default class LineupsTabView extends React.Component {
