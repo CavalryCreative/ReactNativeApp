@@ -20,9 +20,9 @@ loadFeed(){
 
         this.setState({
           isLoading: false,
-          dataSource: responseJson.Matches[0],
+          dataSource: responseJson.Matches[0].HomeLineUp,
         }, function(){
-console.log(responseJson.Matches[0]);
+          console.log(responseJson.Matches[0].HomeLineUp);
         });
 
       })
@@ -50,8 +50,8 @@ console.log(responseJson.Matches[0]);
         <View>
            <FlatList
             data={this.state.dataSource}
-            renderItem={({item}) => <Text>{item.HomeLineUp.PlayerSurname}</Text>}
-            //keyExtractor={(item, index) => index}
+            renderItem={({item}) => <Text>{item.PlayerSurname}</Text>}
+            keyExtractor={(item, index) => index}
           />
         </View>
       );
