@@ -3,6 +3,8 @@ import { View, StyleSheet, Dimensions, Text } from 'react-native';
 import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
 
 import Lineup  from './Lineup'
+import LeagueTable  from './Table'
+import Fixtures  from './Fixtures'
 
 const LineupRoute = () => (
   //<View style={[styles.container, { backgroundColor: '#ff4081' }]} />
@@ -10,10 +12,10 @@ const LineupRoute = () => (
 );
 const TableRoute = () => (
   //<View style={[styles.container, { backgroundColor: '#673ab7' }]} />
-  <Text>Jim</Text>
+  <LeagueTable />
 );
 const FixtureRoute = () => (
-  <Text>Bob</Text>
+  <Fixtures />
   //<View style={[styles.container, { backgroundColor: '#373ab7' }]} />
 );
 
