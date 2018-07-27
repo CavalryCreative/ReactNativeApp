@@ -50,7 +50,7 @@ loadFeed(){
         <View>
            <FlatList
             data={this.state.dataSource}
-            renderItem={({item}) => <Text>{item.Name}</Text>}
+            renderItem={({item}) => <Text>{item.Name} {item.GamesPlayed} {item.GoalDifference} {item.Points}</Text>}
             keyExtractor={(item, index) => index}
           />
         </View>

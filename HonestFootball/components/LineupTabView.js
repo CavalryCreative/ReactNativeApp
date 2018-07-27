@@ -8,7 +8,7 @@ import Fixtures  from './Fixtures'
 
 const LineupRoute = () => (
   //<View style={[styles.container, { backgroundColor: '#ff4081' }]} />
-  <Lineup />
+  <Lineup style={styles.lineup}/>
 );
 const TableRoute = () => (
   //<View style={[styles.container, { backgroundColor: '#673ab7' }]} />
@@ -23,9 +23,9 @@ export default class LineupsTabView extends React.Component {
   state = {
     index: 0,
     routes: [
-      { key: 'lineup', title: 'Lineup' },
-      { key: 'table', title: 'Table' },
-      { key: 'fixtures', title: 'Fixtures' },
+      { key: 'lineup', title: 'lineup' },
+      { key: 'table', title: 'table' },
+      { key: 'fixtures', title: 'fixtures' },
     ],
   };
 
@@ -39,7 +39,9 @@ export default class LineupsTabView extends React.Component {
           fixtures: FixtureRoute,
         })}
         onIndexChange={index => this.setState({ index })}
-        initialLayout={{ width: Dimensions.get('window').width }}
+        initialLayout={{ width: Dimensions.get('window').width, height: Dimensions.get('window').height}}
+        style={styles.container}
+        tabStyle={styles.tab}
       />
     );
   }
@@ -48,9 +50,12 @@ export default class LineupsTabView extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#343434',
+    backgroundColor: '#fff',
     borderTopWidth: 1,
-    borderTopColor: '#262626',
+    borderTopColor: '#fff',
     height: 96
   },
+  tab:{
+    backgroundColor: '#fff'
+  }
 });
