@@ -1,14 +1,23 @@
 import React from 'react';
-import { FlatList, ActivityIndicator, Text, View, ListView  } from 'react-native';
+import { Alert, StyleSheet, Dimensions, FlatList, ActivityIndicator, Text, View, ListView  } from 'react-native';
 
 //var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+// screen sizing
+const { width, height } = Dimensions.get('window');
+// orientation must fixed
+const SCREEN_WIDTH = width < height ? width : height;
+// const SCREEN_HEIGHT = width < height ? height : width;
+const isSmallDevice = SCREEN_WIDTH <= 414;
+const numColumns = 2;
 
 export default class Lineup extends React.Component {
 
   constructor(props){
     super(props);
     this.state ={ 
-      isLoading: true
+      isLoading: true,
+      homeTeam: '',
+      awayTeam: '',
     };
   }
 
@@ -20,9 +29,12 @@ loadFeed(){
 
         this.setState({
           isLoading: false,
-          dataSource: responseJson.Matches[0].HomeLineUp,
+          homeDataSource: responseJson.Matches[0].HomeLineUp,
+          awayDataSource: responseJson.Matches[0].HomeLineUp,
+          homeTeam: responseJson.Matches[0].HomeTeam,
+          awayTeam: responseJson.Matches[0].AwayTeam,
         }, function(){
-          console.log(responseJson.Matches[0].HomeLineUp);
+          //Alert.alert(responseJson.Matches[0].HomeTeam);
         });
 
       })
@@ -30,6 +42,20 @@ loadFeed(){
         console.error(error);
       });
 }
+
+ _renderItem = data => {
+    const item = data.item;
+    const isSubbed = JSON.parse(item.Substituted);
+
+    return ( 
+          <View style={{flex: 1, flexDirection: 'row'}}>  
+            <View style={styles.leftitem}>
+              <Text>{item.PlayerSurname} 
+              {String(item.Substituted)}</Text>
+            </View>
+           </View>
+    );
+  };
 
  componentWillMount() {
   this.loadFeed();
@@ -47,13 +73,42 @@ loadFeed(){
     }
 
      return (
-        <View>
-           <FlatList
-            data={this.state.dataSource}
-            renderItem={({item}) => <Text>{item.PlayerSurname}</Text>}
-            keyExtractor={(item, index) => index}
-          />
-        </View>
+        <View style={{flex: 1, flexDirection: 'row'}}>  
+            <View style={styles.leftitem}>
+              <Text>{this.state.homeTeam}</Text>
+               <FlatList
+                data={this.state.homeDataSource}
+                renderItem={this._renderItem}
+                keyExtractor={(item, index) => index}
+              />
+            </View>
+            <View style={styles.rightitem}>
+            <Text>{this.state.awayTeam}</Text>
+               <FlatList
+                data={this.state.awayDataSource}
+                renderItem={this._renderItem}
+                keyExtractor={(item, index) => index}
+              />
+            </View>
+           </View>
       );
   }
 }
+
+
+const styles = StyleSheet.create({
+  container: {
+    //flex: 1,
+    backgroundColor: 'rgba(255,255,255,1)',
+  },
+   leftitem: {
+    //justifyContent: 'center', 
+    width: width / 1.5,
+    //textAlign: 'left', 
+  },
+  rightitem: {
+    //justifyContent: 'center', 
+    width: width / 0.5,
+    //textAlign: 'right', 
+  },
+});
