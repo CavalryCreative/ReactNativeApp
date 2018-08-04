@@ -1,5 +1,6 @@
 import React from 'react';
 import { Alert, StyleSheet, Dimensions, FlatList, ActivityIndicator, Text, View, ListView  } from 'react-native';
+import { Icon } from 'react-native-elements';
 
 //var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 // screen sizing
@@ -45,16 +46,35 @@ loadFeed(){
 
  _renderItem = data => {
     const item = data.item;
-    const isSubbed = JSON.parse(item.Substituted);
+    const isSubstituted = String(item.Substituted);
+    const playerSurname = item.PlayerSurname;
+    const playerNumber = item.Number;
+    const hasYellowCard = "false";
+    const hasRedCard = "false";
+    const goalsScored = "0";
+    const subTime = item.SubTime;
 
-    return ( 
-          <View style={{flex: 1, flexDirection: 'row'}}>  
-            <View style={styles.leftitem}>
-              <Text>{item.PlayerSurname} 
-              {String(item.Substituted)}</Text>
-            </View>
-           </View>
-    );
+    let retStr = '';
+
+    // isSubstituted (True/False), HasYellowCard, HasRedCard, HasScored, SubOn
+    
+      if(isSubstituted === "false")
+      {
+        retStr = playerNumber + ' ' + playerSurname;
+
+        return ( 
+          <Text>{retStr}<Icon name='rowing' /></Text>
+          )
+        
+      }
+      else
+      {
+        retStr = playerNumber + ' ' + playerSurname + ' ' + subTime;
+
+        return ( 
+          <Text style={styles.substituted}>{retStr}</Text>
+          )
+      }       
   };
 
  componentWillMount() {
@@ -110,5 +130,8 @@ const styles = StyleSheet.create({
     //justifyContent: 'center', 
     width: width / 0.5,
     //textAlign: 'right', 
+  },
+  substituted:{
+
   },
 });
