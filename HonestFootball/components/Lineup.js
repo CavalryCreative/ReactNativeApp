@@ -11,6 +11,54 @@ const SCREEN_WIDTH = width < height ? width : height;
 const isSmallDevice = SCREEN_WIDTH <= 414;
 const numColumns = 2;
 
+const GoalsScored = (props) => {
+  
+  const goals = props.goals;
+
+  return goals.map(function(goal, i){
+    return(
+     <Icon name='fingerprint' />
+    );
+  });
+
+  // const content = goals.map((goal, index) =>
+    
+  //    <Icon name='fingerprint' />
+  // );
+  // return (   
+  //    <Icon name='fingerprint' />
+  //     //{content}
+  // );
+}
+
+const YellowCard = (props) => {
+  
+  const hasCard = props.hasCard;
+
+  if(hasCard === 'true')
+  {
+    return <Icon name='explore' />
+  }
+  else
+  {
+    return null;
+  }
+}
+
+const RedCard = (props) => {
+  
+ const hasCard = props.hasCard;
+
+  if(hasCard === 'true')
+  {
+    return <Icon name='eject' />
+  }
+  else
+  {
+    return null;
+  }
+}
+
 export default class Lineup extends React.Component {
 
   constructor(props){
@@ -49,32 +97,41 @@ loadFeed(){
     const isSubstituted = String(item.Substituted);
     const playerSurname = item.PlayerSurname;
     const playerNumber = item.Number;
-    const hasYellowCard = "false";
-    const hasRedCard = "false";
-    const goalsScored = "0";
+    //add to feed
+    const hasYellowCard = "true";
+    const hasRedCard = "true";
+    const goalsScored = parseInt('1');
     const subTime = item.SubTime;
 
+    //let goalsScoredElement;
+    let yellowCardElement;
+    let redCardElement;
+    let retElement;
     let retStr = '';
 
     // isSubstituted (True/False), HasYellowCard, HasRedCard, HasScored, SubOn
     
+    retStr = playerNumber + ' ' + playerSurname;
+
+//create array goals scored
+let goals = [];
+
+    for (var i = 0; i < goalsScored; i++) {
+      goals.push(i);
+    }
+
       if(isSubstituted === "false")
       {
-        retStr = playerNumber + ' ' + playerSurname;
-
-        return ( 
-          <Text>{retStr}<Icon name='rowing' /></Text>
-          )
-        
+       retElement = <Text>{retStr} <GoalsScored goals={goals} /> <YellowCard hasCard={hasYellowCard} /> <RedCard hasCard={hasRedCard} /></Text>;
       }
       else
       {
-        retStr = playerNumber + ' ' + playerSurname + ' ' + subTime;
+        retStr = retStr + ' (' + subTime + ')' ;
+      
+        retElement = <Text style={styles.substituted}>{retStr} <GoalsScored goals={goals} /> <YellowCard hasCard={hasYellowCard} /> <RedCard hasCard={hasRedCard} /></Text>;
+      }   
 
-        return ( 
-          <Text style={styles.substituted}>{retStr}</Text>
-          )
-      }       
+      return retElement;    
   };
 
  componentWillMount() {
