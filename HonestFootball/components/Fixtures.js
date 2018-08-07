@@ -111,8 +111,9 @@ loadFeed(){
      return (
         <View style={styles.container}>
            <FlatList
+           scrollEnabled={false}
             data={this.state.dataSource}
-            keyExtractor={(item, index) => index}
+            keyExtractor={(item, index) => index.toString()}
             renderItem={this._renderItem}
             //getItemLayout={this._getItemLayout}
             //numColumns={numColumns}

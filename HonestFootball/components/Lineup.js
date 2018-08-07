@@ -1,6 +1,6 @@
 import React from 'react';
 import { Alert, StyleSheet, Dimensions, FlatList, ActivityIndicator, Text, View, ListView  } from 'react-native';
-import { Icon } from 'react-native-elements';
+import { Divider, Icon } from 'react-native-elements';
 
 //var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 // screen sizing
@@ -17,18 +17,9 @@ const GoalsScored = (props) => {
 
   return goals.map(function(goal, i){
     return(
-     <Icon name='fingerprint' />
+     <Icon key='{i}' name='fingerprint' />
     );
   });
-
-  // const content = goals.map((goal, index) =>
-    
-  //    <Icon name='fingerprint' />
-  // );
-  // return (   
-  //    <Icon name='fingerprint' />
-  //     //{content}
-  // );
 }
 
 const YellowCard = (props) => {
@@ -92,15 +83,16 @@ loadFeed(){
       });
 }
 
- _renderItem = data => {
+ _renderStartLineup = data => {
     const item = data.item;
+    const isSub = String(item.IsSub);
     const isSubstituted = String(item.Substituted);
     const playerSurname = item.PlayerSurname;
     const playerNumber = item.Number;
     //add to feed
-    const hasYellowCard = "true";
-    const hasRedCard = "true";
-    const goalsScored = parseInt('1');
+    const hasYellowCard = "false";
+    const hasRedCard = "false";
+    const goalsScored = parseInt('0');
     const subTime = item.SubTime;
 
     //let goalsScoredElement;
@@ -110,28 +102,83 @@ loadFeed(){
     let retStr = '';
 
     // isSubstituted (True/False), HasYellowCard, HasRedCard, HasScored, SubOn
-    
-    retStr = playerNumber + ' ' + playerSurname;
+    if(isSub === "false")
+    {
+       retStr = playerNumber + ' ' + playerSurname;
 
 //create array goals scored
-let goals = [];
+      let goals = [];
 
-    for (var i = 0; i < goalsScored; i++) {
-      goals.push(i);
-    }
-
-      if(isSubstituted === "false")
-      {
-       retElement = <Text>{retStr} <GoalsScored goals={goals} /> <YellowCard hasCard={hasYellowCard} /> <RedCard hasCard={hasRedCard} /></Text>;
+      for (var i = 0; i < goalsScored; i++) {
+        goals.push(i);
       }
-      else
-      {
-        retStr = retStr + ' (' + subTime + ')' ;
-      
-        retElement = <Text style={styles.substituted}>{retStr} <GoalsScored goals={goals} /> <YellowCard hasCard={hasYellowCard} /> <RedCard hasCard={hasRedCard} /></Text>;
-      }   
 
-      return retElement;    
+        if(isSubstituted === "false")
+        {
+         retElement = <Text>{retStr} <GoalsScored goals={goals} /> <YellowCard hasCard={hasYellowCard} /> <RedCard hasCard={hasRedCard} /></Text>;
+        }
+        else
+        {
+          retStr = retStr + ' (' + subTime + ')' ;
+        
+          retElement = <Text style={styles.substituted}>{retStr} <GoalsScored goals={goals} /> <YellowCard hasCard={hasYellowCard} /> <RedCard hasCard={hasRedCard} /></Text>;
+        }   
+
+        return retElement;  
+    }
+     else
+     {
+      return null;
+     }
+  };
+
+   _renderSubs = data => {
+    const item = data.item;
+    const isSub = String(item.IsSub);
+    const isSubstituted = String(item.Substituted);
+    const playerSurname = item.PlayerSurname;
+    const playerNumber = item.Number;
+    //add to feed
+    const hasYellowCard = "false";
+    const hasRedCard = "false";
+    const goalsScored = parseInt('0');
+    const subTime = item.SubTime;
+
+    //let goalsScoredElement;
+    let yellowCardElement;
+    let redCardElement;
+    let retElement;
+    let retStr = '';
+
+    // isSubstituted (True/False), HasYellowCard, HasRedCard, HasScored, SubOn
+    if(isSub === "true")
+    {
+       retStr = playerNumber + ' ' + playerSurname;
+
+//create array goals scored
+      let goals = [];
+
+      for (var i = 0; i < goalsScored; i++) {
+        goals.push(i);
+      }
+
+        if(isSubstituted === "false")
+        {
+         retElement = <Text>{retStr} <GoalsScored goals={goals} /> <YellowCard hasCard={hasYellowCard} /> <RedCard hasCard={hasRedCard} /></Text>;
+        }
+        else
+        {
+          retStr = retStr + ' (' + subTime + ')' ;
+        
+          retElement = <Text style={styles.substituted}>{retStr} <GoalsScored goals={goals} /> <YellowCard hasCard={hasYellowCard} /> <RedCard hasCard={hasRedCard} /></Text>;
+        }   
+
+        return retElement;  
+    }
+     else
+     {
+      return null;
+     }
   };
 
  componentWillMount() {
@@ -154,17 +201,33 @@ let goals = [];
             <View style={styles.leftitem}>
               <Text>{this.state.homeTeam}</Text>
                <FlatList
+                scrollEnabled={false}
                 data={this.state.homeDataSource}
-                renderItem={this._renderItem}
-                keyExtractor={(item, index) => index}
+                renderItem={this._renderStartLineup}
+                keyExtractor={(item, index) => index.toString()}
+              />
+              <Divider style={{ backgroundColor: 'blue' }} />
+              <FlatList
+              scrollEnabled={false}
+                data={this.state.homeDataSource}
+                renderItem={this._renderSubs}
+                keyExtractor={(item, index) => index.toString()}
               />
             </View>
             <View style={styles.rightitem}>
             <Text>{this.state.awayTeam}</Text>
                <FlatList
+               scrollEnabled={false}
                 data={this.state.awayDataSource}
-                renderItem={this._renderItem}
-                keyExtractor={(item, index) => index}
+                renderItem={this._renderStartLineup}
+                keyExtractor={(item, index) => index.toString()}
+              />
+              <Divider style={{ backgroundColor: 'blue' }} />
+              <FlatList
+              scrollEnabled={false}
+                data={this.state.awayDataSource}
+                renderItem={this._renderSubs}
+                keyExtractor={(item, index) => index.toString()}
               />
             </View>
            </View>

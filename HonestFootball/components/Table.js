@@ -49,9 +49,10 @@ loadFeed(){
      return (
         <View>
            <FlatList
+           scrollEnabled={false}
             data={this.state.dataSource}
             renderItem={({item}) => <Text>{item.Name} {item.GamesPlayed} {item.GoalDifference} {item.Points}</Text>}
-            keyExtractor={(item, index) => index}
+            keyExtractor={(item, index) => index.toString()}
           />
         </View>
       );
