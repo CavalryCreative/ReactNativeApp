@@ -9,8 +9,21 @@ export default class Stats extends React.Component {
     super(props);
     this.state ={ 
       isLoading: true,
-      homeTeam: '',
-      awayTeam: '',
+      HomePossession: 56,
+          AwayPossession: 44,
+          TotalPossession: HomePossession + AwayPossession,
+          HomeShots: 12,
+          AwayShots: 12,
+          TotalShots: HomeShots + AwayShots,
+          HomeShotsOnTarget: 2,
+          AwayShotsOnTarget: 1,
+          TotalShotsOnTarget: HomeShotsOnTarget + AwayShotsOnTarget,
+          HomeCorners: 9,
+          AwayCorners: 6,
+          TotalCorners: HomeCorners + AwayCorners,
+          HomeFouls: 16,
+          AwayFouls: 18,
+          TotalFouls: HomeFouls + AwayFouls,
     };
   }
 
@@ -23,10 +36,21 @@ loadFeed(){
         this.setState({
           isLoading: false,
           dataSource: responseJson.Matches,
-          HomeComment: responseJson.Matches[0].LatestEvent.HomeComment,
-          AwayComment: responseJson.Matches[0].LatestEvent.AwayComment,
-          Minute: responseJson.Matches[0].LatestEvent.Minute,
-          Score: responseJson.Matches[0].LatestEvent.Score
+          HomePossession: 56,
+          AwayPossession: 44,
+          TotalPossession: HomePossession + AwayPossession,
+          HomeShots: 12,
+          AwayShots: 12,
+          TotalShots: HomeShots + AwayShots,
+          HomeShotsOnTarget: 2,
+          AwayShotsOnTarget: 1,
+          TotalShotsOnTarget: HomeShotsOnTarget + AwayShotsOnTarget,
+          HomeCorners: 9,
+          AwayCorners: 6,
+          TotalCorners: HomeCorners + AwayCorners,
+          HomeFouls: 16,
+          AwayFouls: 18,
+          TotalFouls: HomeFouls + AwayFouls,
         }, function(){
 
         });
@@ -38,7 +62,8 @@ loadFeed(){
 }
 
  componentWillMount() {
-    this.timer = setInterval(()=> this.loadFeed(), 5000)
+  //this.loadFeed();
+    //this.timer = setInterval(()=> this.loadFeed(), 5000)
   }
 
   render(){
