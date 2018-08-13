@@ -30,17 +30,13 @@ export default class RSwiper extends React.Component {
           showsPagination={false}
           index={1}>
           <View style={styles.slide1}>
-             <LineupsTabView /> 
+             <LineupsTabView dataSource = {this.props.dataSource} /> 
           </View>
-          <View style={styles.slide2}>
-             <Comment 
-                HomeComment={this.props.HomeComment} 
-                AwayComment={this.props.AwayComment} 
-                Minute={this.props.Minute} 
-                Score={this.props.Score} />
 
-            <Text style={styles.text}>Comments - touch for stats</Text>
+          <View style={styles.slide2}>
+             <Comment dataSource = {this.props.dataSource} />
           </View>
+          
           <View style={styles.slide3}>
             <Text style={styles.text}>Share</Text>
           </View>

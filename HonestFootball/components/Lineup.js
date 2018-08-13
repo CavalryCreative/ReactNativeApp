@@ -70,7 +70,7 @@ loadFeed(){
         this.setState({
           isLoading: false,
           homeDataSource: responseJson.Matches[0].HomeLineUp,
-          awayDataSource: responseJson.Matches[0].HomeLineUp,
+          awayDataSource: responseJson.Matches[0].AwayLineUp,
           homeTeam: responseJson.Matches[0].HomeTeam,
           awayTeam: responseJson.Matches[0].AwayTeam,
         }, function(){
@@ -181,7 +181,7 @@ loadFeed(){
      }
   };
 
- componentWillMount() {
+ componentDidMount() {
   this.loadFeed();
     //this.timer = setInterval(()=> this.loadFeed(), 1000)
   }

@@ -32,7 +32,8 @@ export default class App extends Component<Props> {
       HomeComment: '',
       AwayComment: '',
       Minute: '',
-      Score: ''
+      Score: '',
+      dataSource: ''
     };
   }
 
@@ -45,25 +46,25 @@ export default class App extends Component<Props> {
         this.setState({
           isLoading: false,
           dataSource: responseJson.Matches,
-          HomeComment: responseJson.Matches[1].LatestEvent.HomeComment,
-          AwayComment: responseJson.Matches[1].LatestEvent.AwayComment,
-          Minute: responseJson.Matches[1].LatestEvent.Minute,
-          Score: responseJson.Matches[1].LatestEvent.Score,
-          HomePossession: Number(responseJson.Matches[1].MatchStats.HomeTeamPossessionTime),
-          AwayPossession: Number(responseJson.Matches[1].MatchStats.AwayTeamPossessionTime),
-          TotalPossession: HomePossession + AwayPossession,
-          HomeShots: Number(responseJson.Matches[1].MatchStats.HomeTeamTotalShots),
-          AwayShots: Number(responseJson.Matches[1].MatchStats.AwayTeamTotalShots),
-          TotalShots: HomeShots + AwayShots,
-          HomeShotsOnTarget: Number(responseJson.Matches[1].MatchStats.HomeTeamOnGoalShots),
-          AwayShotsOnTarget: Number(responseJson.Matches[1].MatchStats.AwayTeamOnGoalShots),
-          TotalShotsOnTarget: HomeShotsOnTarget + AwayShotsOnTarget,
-          HomeCorners: Number(responseJson.Matches[1].MatchStats.HomeTeamCorners),
-          AwayCorners: Number(responseJson.Matches[1].MatchStats.AwayTeamCorners),
-          TotalCorners: HomeCorners + AwayCorners,
-          HomeFouls: Number(responseJson.Matches[1].MatchStats.HomeTeamFouls),
-          AwayFouls: Number(responseJson.Matches[1].MatchStats.AwayTeamFouls),
-          TotalFouls: HomeFouls + AwayFouls
+          // HomeComment: responseJson.Matches[1].LatestEvent.HomeComment,
+          // AwayComment: responseJson.Matches[1].LatestEvent.AwayComment,
+          // Minute: responseJson.Matches[1].LatestEvent.Minute,
+          // Score: responseJson.Matches[1].LatestEvent.Score,
+          // HomePossession: Number(responseJson.Matches[1].MatchStats.HomeTeamPossessionTime),
+          // AwayPossession: Number(responseJson.Matches[1].MatchStats.AwayTeamPossessionTime),
+          // TotalPossession: HomePossession + AwayPossession,
+          // HomeShots: Number(responseJson.Matches[1].MatchStats.HomeTeamTotalShots),
+          // AwayShots: Number(responseJson.Matches[1].MatchStats.AwayTeamTotalShots),
+          // TotalShots: HomeShots + AwayShots,
+          // HomeShotsOnTarget: Number(responseJson.Matches[1].MatchStats.HomeTeamOnGoalShots),
+          // AwayShotsOnTarget: Number(responseJson.Matches[1].MatchStats.AwayTeamOnGoalShots),
+          // TotalShotsOnTarget: HomeShotsOnTarget + AwayShotsOnTarget,
+          // HomeCorners: Number(responseJson.Matches[1].MatchStats.HomeTeamCorners),
+          // AwayCorners: Number(responseJson.Matches[1].MatchStats.AwayTeamCorners),
+          // TotalCorners: HomeCorners + AwayCorners,
+          // HomeFouls: Number(responseJson.Matches[1].MatchStats.HomeTeamFouls),
+          // AwayFouls: Number(responseJson.Matches[1].MatchStats.AwayTeamFouls),
+          // TotalFouls: HomeFouls + AwayFouls
         }, function(){
           
         });
@@ -90,13 +91,7 @@ export default class App extends Component<Props> {
     }
 
     return (   
-         <RSwiper 
-            HomeComment={this.state.HomeComment} 
-            AwayComment={this.state.AwayComment} 
-            Minute={this.state.Minute} 
-            Score={this.state.Score} />
-
-        //<RSwiper />    
+         <RSwiper dataSource = {this.state.dataSource} />
     );
   }
 }
