@@ -29,7 +29,7 @@ export default class Stats extends React.Component {
 
 loadFeed(){
   //http://honest-apps.eu-west-1.elasticbeanstalk.com/api/feed/9815
-  return fetch('http://honest-apps.eu-west-1.elasticbeanstalk.com/api/feed/9815')
+  return fetch('http://honest-apps.eu-west-1.elasticbeanstalk.com/api/feed/9259')
       .then((response) => response.json())
       .then((responseJson) => {
 
