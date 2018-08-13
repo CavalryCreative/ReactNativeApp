@@ -36,20 +36,20 @@ loadFeed(){
         this.setState({
           isLoading: false,
           dataSource: responseJson.Matches,
-          HomePossession: 56,
-          AwayPossession: 44,
+          HomePossession: responseJson.Matches[0].MatchStats.HomeTeamPossessionTime,
+          AwayPossession: responseJson.Matches[0].MatchStats.AwayTeamPossessionTime,
           TotalPossession: HomePossession + AwayPossession,
-          HomeShots: 12,
-          AwayShots: 12,
+          HomeShots: responseJson.Matches[0].MatchStats.HomeTeamTotalShots,
+          AwayShots: responseJson.Matches[0].MatchStats.AwayTeamTotalShots,
           TotalShots: HomeShots + AwayShots,
-          HomeShotsOnTarget: 2,
-          AwayShotsOnTarget: 1,
+          HomeShotsOnTarget: responseJson.Matches[0].MatchStats.HomeTeamOnGoalShots,
+          AwayShotsOnTarget: responseJson.Matches[0].MatchStats.AwayTeamOnGoalShots,
           TotalShotsOnTarget: HomeShotsOnTarget + AwayShotsOnTarget,
-          HomeCorners: 9,
-          AwayCorners: 6,
+          HomeCorners: responseJson.Matches[0].MatchStats.HomeTeamCorners,
+          AwayCorners: responseJson.Matches[0].MatchStats.AwayTeamCorners,
           TotalCorners: HomeCorners + AwayCorners,
-          HomeFouls: 16,
-          AwayFouls: 18,
+          HomeFouls: responseJson.Matches[0].MatchStats.HomeTeamFouls,
+          AwayFouls: responseJson.Matches[0].MatchStats.AwayTeamFouls,
           TotalFouls: HomeFouls + AwayFouls,
         }, function(){
 
@@ -62,7 +62,7 @@ loadFeed(){
 }
 
  componentWillMount() {
-  //this.loadFeed();
+  this.loadFeed();
     //this.timer = setInterval(()=> this.loadFeed(), 5000)
   }
 
