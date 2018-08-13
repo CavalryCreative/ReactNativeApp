@@ -21,9 +21,11 @@ export default class RSwiper extends React.Component {
         loop={false}
         showsPagination={false}
         index={1}>
+        
         <View style={styles.slide2}>
           <Text style={styles.text}>Settings</Text>
         </View>
+
         <Swiper
           horizontal={false}
           loop={false}
@@ -36,14 +38,16 @@ export default class RSwiper extends React.Component {
           <View style={styles.slide2}>
              <Comment dataSource = {this.props.dataSource} />
           </View>
-          
+
           <View style={styles.slide3}>
             <Text style={styles.text}>Share</Text>
           </View>
-        </Swiper>              
+        </Swiper> 
+
         <View style={styles.slide3}>
           <Text style={styles.text}>News</Text>
         </View>
+
       </Swiper>      
       );
   }
