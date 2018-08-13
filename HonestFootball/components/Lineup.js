@@ -63,7 +63,7 @@ export default class Lineup extends React.Component {
 
 loadFeed(){
   
-  return fetch('http://honest-apps.eu-west-1.elasticbeanstalk.com/api/feed/9815')
+  return fetch('http://honest-apps.eu-west-1.elasticbeanstalk.com/api/feed/9259')
       .then((response) => response.json())
       .then((responseJson) => {
 

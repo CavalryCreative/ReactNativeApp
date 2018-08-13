@@ -23,7 +23,7 @@ export default class Fixtures extends React.Component {
 
 loadFeed(){
   
-  return fetch('http://honest-apps.eu-west-1.elasticbeanstalk.com/api/fixtures/9815')
+  return fetch('http://honest-apps.eu-west-1.elasticbeanstalk.com/api/fixtures/9259')
       .then((response) => response.json())
       .then((responseJson) => {
 

@@ -11,9 +11,6 @@ export default class RSwiper extends React.Component {
 
   constructor(props){
     super(props);
-    this.state ={ 
-     
-    };
   }
 
   render(){
@@ -36,7 +33,12 @@ export default class RSwiper extends React.Component {
              <LineupsTabView /> 
           </View>
           <View style={styles.slide2}>
-            <Comment />
+             <Comment 
+                HomeComment={this.props.HomeComment} 
+                AwayComment={this.props.AwayComment} 
+                Minute={this.props.Minute} 
+                Score={this.props.Score} />
+
             <Text style={styles.text}>Comments - touch for stats</Text>
           </View>
           <View style={styles.slide3}>

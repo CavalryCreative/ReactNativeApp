@@ -6,6 +6,7 @@
 
 import React, { Component } from 'react';
 import {
+  ActivityIndicator,
   Platform,
   StyleSheet,
   Text,
@@ -36,50 +37,54 @@ export default class App extends Component<Props> {
   }
 
   loadFeed(){
-  //http://honest-apps.eu-west-1.elasticbeanstalk.com/api/feed/9815
-  return fetch('http://honest-apps.eu-west-1.elasticbeanstalk.com/api/feed/9815')
+  
+  return fetch('http://honest-apps.eu-west-1.elasticbeanstalk.com/api/feed/9259')
       .then((response) => response.json())
       .then((responseJson) => {
 
         this.setState({
           isLoading: false,
           dataSource: responseJson.Matches,
-          HomeComment: responseJson.Matches[0].LatestEvent.HomeComment,
-          AwayComment: responseJson.Matches[0].LatestEvent.AwayComment,
-          Minute: responseJson.Matches[0].LatestEvent.Minute,
-          Score: responseJson.Matches[0].LatestEvent.Score
+          HomeComment: responseJson.Matches[1].LatestEvent.HomeComment,
+          AwayComment: responseJson.Matches[1].LatestEvent.AwayComment,
+          Minute: responseJson.Matches[1].LatestEvent.Minute,
+          Score: responseJson.Matches[1].LatestEvent.Score
         }, function(){
-
+          
         });
 
       })
       .catch((error) =>{
-        console.error(error);
+        error => this.setState({ error, isLoading: false })
       });
 }
 
- componentWillMount() {
-    this.timer = setInterval(()=> this.loadFeed(), 5000)
+ componentDidMount() {
+  
+  this.loadFeed();
+    //this.timer = setInterval(()=> this.loadFeed(), 5000);
   }
   
   render() {
-    return (       
-         
-        <RSwiper />    
+     if(this.state.isLoading){
+      return(
+        <View style={{flex: 1, padding: 20}}>
+          <ActivityIndicator/>
+        </View>
+      )
+    }
+
+    return (   
+         <RSwiper 
+            HomeComment={this.state.HomeComment} 
+            AwayComment={this.state.AwayComment} 
+            Minute={this.state.Minute} 
+            Score={this.state.Score} />
+
+        //<RSwiper />    
     );
   }
 }
-
-// function getFeed() {
-//   return fetch('http://honest-apps.eu-west-1.elasticbeanstalk.com/api/feed/9815')
-//     .then((response) => response.json())
-//     .then((responseJson) => {
-//       return responseJson.movies;
-//     })
-//     .catch((error) => {
-//       console.error(error);
-//     });
-// }
 
 const styles = StyleSheet.create({
   container: {
