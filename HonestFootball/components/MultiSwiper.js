@@ -6,6 +6,7 @@ import TabBarContainer from './TabBarContainer';
 import Comment from './comment'
 import PropTypes from 'prop-types';
 import LineupsTabView  from './LineupTabView'
+import Settings from './Settings'
 
 import Stats from './Stats'
 
@@ -25,7 +26,7 @@ export default class RSwiper extends React.Component {
         index={1}>
         
         <View style={styles.slide2}>
-          <Text style={styles.text}>Settings</Text>
+          <Settings />
         </View>
 
           <Swiper

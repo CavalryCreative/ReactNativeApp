@@ -35,6 +35,8 @@ export default class LineupsTabView extends React.Component {
    constructor(props){
     super(props);
 
+let response = this.props.dataSource;
+
      this.state = {
       index: 0,
       routes: [
@@ -42,48 +44,29 @@ export default class LineupsTabView extends React.Component {
         { key: 'table', title: 'table' },
         { key: 'fixtures', title: 'fixtures' },
       ],
-      dataSource: ''
+      dataSource: response
     };
   }
 
-loadData(){
-  
-  let response = this.props.dataSource;
-console.log('Load Data Balls ' + response[0].LatestEvent.HomeComment);
-    this.setState({
-          
-          dataSource: response
-        }, function(){         
-        });
-}
-
- componentDidMount() {
-  this.loadData();
+renderScene = ({ route }) => {
+   switch (route.key) {
+     case 'lineup':
+       return <Lineup dataSource={this.state.dataSource} />;
+     case 'table':
+       return <LeagueTable />;
+      case 'fixtures':
+       return <Fixtures />;
+     default:
+      return null;
   }
-
-// _renderScene=({ this.state.routes }) => {
-//           switch (route.key) {
-//           case 'lineup':
-//             return <Lineup dataSource={this.state.dataSource} />;
-//           case 'table':
-//             return <LeagueTable />;
-//           case 'fixtures'
-//             return <Fixtures />
-//           default:
-//             return null;
-//         }})
+  };
 
   render() {
-    let lineup = <Lineup dataSource={this.props.dataSource} />
-
+    
     return (
       <TabView
         navigationState={this.state}
-        renderScene={SceneMap({
-          lineup: LineupRoute,
-          table: TableRoute,
-          fixtures: FixtureRoute,
-        })}
+        renderScene={this.renderScene}
         onIndexChange={index => this.setState({ index })}
         initialLayout={{ width: Dimensions.get('window').width, height: Dimensions.get('window').height}}
         style={styles.container}
