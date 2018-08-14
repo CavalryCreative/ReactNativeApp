@@ -61,6 +61,18 @@ console.log('Load Data Balls ' + response[0].LatestEvent.HomeComment);
   this.loadData();
   }
 
+_renderScene=({ this.state.routes }) => {
+          switch (route.key) {
+          case 'lineup':
+            return <Lineup dataSource={this.state.dataSource} />;
+          case 'table':
+            return <LeagueTable />;
+          case 'fixtures'
+            return <Fixtures />
+          default:
+            return null;
+        }})
+
   render() {
     let lineup = <Lineup dataSource={this.props.dataSource} />
 
