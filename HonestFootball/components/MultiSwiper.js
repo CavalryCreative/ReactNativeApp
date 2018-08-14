@@ -7,6 +7,8 @@ import Comment from './comment'
 import PropTypes from 'prop-types';
 import LineupsTabView  from './LineupTabView'
 
+import Stats from './Stats'
+
 export default class RSwiper extends React.Component {
 
   constructor(props){
@@ -26,29 +28,30 @@ export default class RSwiper extends React.Component {
           <Text style={styles.text}>Settings</Text>
         </View>
 
-        <Swiper
-          horizontal={false}
-          loop={false}
-          showsPagination={false}
-          index={1}>
-          <View style={styles.slide1}>
-             <LineupsTabView dataSource = {this.props.dataSource} /> 
-          </View>
+          <Swiper
+            horizontal={false}
+            loop={false}
+            showsPagination={false}
+            index={1}>
+            <View style={styles.slide1}>
+               <LineupsTabView dataSource = {this.props.dataSource} /> 
+            </View>
 
-          <View style={styles.slide2}>
-             <Comment dataSource = {this.props.dataSource} />
-          </View>
+            <View style={styles.slide2}>
+               <Comment dataSource = {this.props.dataSource} />
+            </View>
+
+            <View style={styles.slide3}>
+              <Stats dataSource = {this.props.dataSource} />
+              <Text style={styles.text}>Share</Text>
+            </View>
+          </Swiper> 
 
           <View style={styles.slide3}>
-            <Text style={styles.text}>Share</Text>
+            <Text style={styles.text}>News</Text>
           </View>
-        </Swiper> 
 
-        <View style={styles.slide3}>
-          <Text style={styles.text}>News</Text>
-        </View>
-
-      </Swiper>      
+        </Swiper>      
       );
   }
 }

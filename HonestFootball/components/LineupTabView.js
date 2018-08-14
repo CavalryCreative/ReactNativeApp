@@ -1,35 +1,69 @@
 import * as React from 'react';
 import { View, StyleSheet, Dimensions, Text } from 'react-native';
-import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
+import { Alert, TabView, TabBar, SceneMap } from 'react-native-tab-view';
 
 import Lineup  from './Lineup'
 import LeagueTable  from './Table'
 import Fixtures  from './Fixtures'
 
-const LineupRoute = () => (
+const LineupRoute = (props) => {
   //<View style={[styles.container, { backgroundColor: '#ff4081' }]} />
-  <Lineup style={styles.lineup}/>
-);
+  const response = props.dataSource;
+
+  if (response !== undefined)
+  {
+    return <Lineup dataSource={response} />
+  }
+  else
+  {
+    return <Text>Twat</Text>
+  }
+};
+
 const TableRoute = () => (
   //<View style={[styles.container, { backgroundColor: '#673ab7' }]} />
   <LeagueTable />
 );
+
 const FixtureRoute = () => (
   <Fixtures />
   //<View style={[styles.container, { backgroundColor: '#373ab7' }]} />
 );
 
 export default class LineupsTabView extends React.Component {
-  state = {
-    index: 0,
-    routes: [
-      { key: 'lineup', title: 'lineup' },
-      { key: 'table', title: 'table' },
-      { key: 'fixtures', title: 'fixtures' },
-    ],
-  };
+
+   constructor(props){
+    super(props);
+
+     this.state = {
+      index: 0,
+      routes: [
+        { key: 'lineup', title: 'lineup' },
+        { key: 'table', title: 'table' },
+        { key: 'fixtures', title: 'fixtures' },
+      ],
+      dataSource: ''
+    };
+  }
+
+loadData(){
+  
+  let response = this.props.dataSource;
+console.log('Load Data Balls ' + response[0].LatestEvent.HomeComment);
+    this.setState({
+          
+          dataSource: response
+        }, function(){         
+        });
+}
+
+ componentDidMount() {
+  this.loadData();
+  }
 
   render() {
+    let lineup = <Lineup dataSource={this.props.dataSource} />
+
     return (
       <TabView
         navigationState={this.state}

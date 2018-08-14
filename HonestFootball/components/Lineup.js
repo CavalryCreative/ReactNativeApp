@@ -61,26 +61,25 @@ export default class Lineup extends React.Component {
     };
   }
 
-loadFeed(){
+componentDidMount() {
+  this.loadData();
+  }
   
-  return fetch('http://honest-apps.eu-west-1.elasticbeanstalk.com/api/feed/9259')
-      .then((response) => response.json())
-      .then((responseJson) => {
+loadData(){
+  
+  let response = this.props.dataSource;
 
-        this.setState({
-          isLoading: false,
-          homeDataSource: responseJson.Matches[0].HomeLineUp,
-          awayDataSource: responseJson.Matches[0].AwayLineUp,
-          homeTeam: responseJson.Matches[0].HomeTeam,
-          awayTeam: responseJson.Matches[0].AwayTeam,
-        }, function(){
-          //Alert.alert(responseJson.Matches[0].HomeTeam);
-        });
-
-      })
-      .catch((error) =>{
-        console.error(error);
-      });
+    this.setState({
+          
+          homeDataSource: response[0].HomeLineUp,
+          awayDataSource: response[0].AwayLineUp,
+          homeTeam: response[0].HomeTeam,
+          awayTeam: response[0].AwayTeam,
+        }, function(){         
+        })
+    // .catch((error) =>{
+    //     console.error(error);
+    //   });
 }
 
  _renderStartLineup = data => {
@@ -181,20 +180,7 @@ loadFeed(){
      }
   };
 
- componentDidMount() {
-  this.loadFeed();
-    //this.timer = setInterval(()=> this.loadFeed(), 1000)
-  }
-
   render(){
-
-    if(this.state.isLoading){
-      return(
-        <View style={{flex: 1, padding: 20}}>
-          <ActivityIndicator/>
-        </View>
-      )
-    }
 
      return (
         <View style={{flex: 1, flexDirection: 'row'}}>  
@@ -234,7 +220,6 @@ loadFeed(){
       );
   }
 }
-
 
 const styles = StyleSheet.create({
   container: {

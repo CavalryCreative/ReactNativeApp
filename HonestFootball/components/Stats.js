@@ -1,87 +1,81 @@
 import React from 'react';
-import { FlatList, ActivityIndicator, Text, View, ListView  } from 'react-native';
-
-//var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+import { Text, View, ListView  } from 'react-native';
 
 export default class Stats extends React.Component {
 
   constructor(props){
     super(props);
     this.state ={ 
-      isLoading: true,
-      HomePossession: 56,
-          AwayPossession: 44,
-          TotalPossession: HomePossession + AwayPossession,
-          HomeShots: 12,
-          AwayShots: 12,
-          TotalShots: HomeShots + AwayShots,
-          HomeShotsOnTarget: 2,
-          AwayShotsOnTarget: 1,
-          TotalShotsOnTarget: HomeShotsOnTarget + AwayShotsOnTarget,
-          HomeCorners: 9,
-          AwayCorners: 6,
-          TotalCorners: HomeCorners + AwayCorners,
-          HomeFouls: 16,
-          AwayFouls: 18,
-          TotalFouls: HomeFouls + AwayFouls,
+      HomePossession: 0,
+          AwayPossession: 0,
+          TotalPossession: 0,
+          HomeShots: 0,
+          AwayShots: 0,
+          TotalShots: 0,
+          HomeShotsOnTarget: 0,
+          AwayShotsOnTarget: 0,
+          TotalShotsOnTarget: 0,
+          HomeCorners: 0,
+          AwayCorners: 0,
+          TotalCorners: 0,
+          HomeFouls: 0,
+          AwayFouls: 0,
+          TotalFouls: 0,
     };
   }
 
-loadFeed(){
-  //http://honest-apps.eu-west-1.elasticbeanstalk.com/api/feed/9815
-  return fetch('http://honest-apps.eu-west-1.elasticbeanstalk.com/api/feed/9259')
-      .then((response) => response.json())
-      .then((responseJson) => {
+loadData(){
+  
+  let response = this.props.dataSource;
+  const totalPossession = parseInt(response[0].MatchStats.HomeTeamPossessionTime) + parseInt(response[0].MatchStats.AwayTeamPossessionTime);
+  const totalShots = parseInt(response[0].MatchStats.HomeTeamTotalShots) + parseInt(response[0].MatchStats.AwayTeamTotalShots);
+  const totalShotsOnTarget = parseInt(response[0].MatchStats.HomeTeamOnGoalShots) + parseInt(response[0].MatchStats.AwayTeamOnGoalShots);
+  const totalCorners = parseInt(response[0].MatchStats.HomeTeamCorners) + parseInt(response[0].MatchStats.AwayTeamCorners);
+  const totalFouls = parseInt(response[0].MatchStats.HomeTeamFouls) + parseInt(response[0].MatchStats.AwayTeamFouls);
 
-        this.setState({
-          isLoading: false,
-          dataSource: responseJson.Matches,
-          HomePossession: responseJson.Matches[0].MatchStats.HomeTeamPossessionTime,
-          AwayPossession: responseJson.Matches[0].MatchStats.AwayTeamPossessionTime,
-          TotalPossession: HomePossession + AwayPossession,
-          HomeShots: responseJson.Matches[0].MatchStats.HomeTeamTotalShots,
-          AwayShots: responseJson.Matches[0].MatchStats.AwayTeamTotalShots,
-          TotalShots: HomeShots + AwayShots,
-          HomeShotsOnTarget: responseJson.Matches[0].MatchStats.HomeTeamOnGoalShots,
-          AwayShotsOnTarget: responseJson.Matches[0].MatchStats.AwayTeamOnGoalShots,
-          TotalShotsOnTarget: HomeShotsOnTarget + AwayShotsOnTarget,
-          HomeCorners: responseJson.Matches[0].MatchStats.HomeTeamCorners,
-          AwayCorners: responseJson.Matches[0].MatchStats.AwayTeamCorners,
-          TotalCorners: HomeCorners + AwayCorners,
-          HomeFouls: responseJson.Matches[0].MatchStats.HomeTeamFouls,
-          AwayFouls: responseJson.Matches[0].MatchStats.AwayTeamFouls,
-          TotalFouls: HomeFouls + AwayFouls,
+    this.setState({
+          HomePossession: parseInt(response[0].MatchStats.HomeTeamPossessionTime),
+          AwayPossession: parseInt(response[0].MatchStats.AwayTeamPossessionTime),
+          TotalPossession: totalPossession,
+          HomeShots: parseInt(response[0].MatchStats.HomeTeamTotalShots),
+          AwayShots: parseInt(response[0].MatchStats.AwayTeamTotalShots),
+          TotalShots: totalShots,
+          HomeShotsOnTarget: parseInt(response[0].MatchStats.HomeTeamOnGoalShots),
+          AwayShotsOnTarget: parseInt(response[0].MatchStats.AwayTeamOnGoalShots),
+          TotalShotsOnTarget: totalShotsOnTarget,
+          HomeCorners: parseInt(response[0].MatchStats.HomeTeamCorners),
+          AwayCorners: parseInt(response[0].MatchStats.AwayTeamCorners),
+          TotalCorners: totalCorners,
+          HomeFouls: parseInt(response[0].MatchStats.HomeTeamFouls),
+          AwayFouls: parseInt(response[0].MatchStats.AwayTeamFouls),
+          TotalFouls: totalFouls
         }, function(){
-
         });
-
-      })
-      .catch((error) =>{
-        console.error(error);
-      });
 }
 
- componentWillMount() {
-  this.loadFeed();
-    //this.timer = setInterval(()=> this.loadFeed(), 5000)
+ componentDidMount() {
+  this.loadData();
   }
 
   render(){
 
-    if(this.state.isLoading){
-      return(
-        <View style={{flex: 1, padding: 20}}>
-          <ActivityIndicator/>
-        </View>
-      )
-    }
-
      return (
         <View>
-          <Text>{this.state.Minute}</Text>
-          <Text>{this.state.HomeComment}</Text>
-          <Text>{this.state.AwayComment}</Text>
-          <Text>{this.state.Score}</Text>
+          <Text>{this.state.HomePossession}</Text>
+          <Text>{this.state.AwayPossession}</Text>
+          <Text>{this.state.TotalPossession}</Text>
+          <Text>{this.state.HomeShots}</Text>
+          <Text>{this.state.AwayShots}</Text>
+          <Text>{this.state.TotalShots}</Text>
+          <Text>{this.state.HomeShotsOnTarget}</Text>
+          <Text>{this.state.AwayShotsOnTarget}</Text>
+          <Text>{this.state.TotalShotsOnTarget}</Text>
+          <Text>{this.state.HomeCorners}</Text>
+          <Text>{this.state.AwayCorners}</Text>
+          <Text>{this.state.TotalCorners}</Text>
+          <Text>{this.state.HomeFouls}</Text>
+          <Text>{this.state.AwayFouls}</Text>
+          <Text>{this.state.TotalFouls}</Text>
         </View>
       );
   }

@@ -1,8 +1,6 @@
 import React from 'react';
 import { StyleSheet, FlatList, ActivityIndicator, Text, View, Dimensions, ListView  } from 'react-native';
 
-//var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-
 // screen sizing
 const { width, height } = Dimensions.get('window');
 // orientation must fixed
@@ -17,7 +15,7 @@ export default class Fixtures extends React.Component {
   constructor(props){
     super(props);
     this.state ={ 
-      isLoading: true
+      
     };
   }
 
@@ -28,12 +26,10 @@ loadFeed(){
       .then((responseJson) => {
 
         this.setState({
-          isLoading: false,
           dataSource: responseJson.Fixtures,
         }, function(){
-          console.log(responseJson.Fixtures);
+          
         });
-
       })
       .catch((error) =>{
         console.error(error);
@@ -54,48 +50,12 @@ loadFeed(){
     );
   };
 
-// <View style={{flex: 1, flexDirection: 'row'}}>
-//           <View style={{width: width / 2, height: height}}>
-//            <Text>{item.HomeTeam} v {item.AwayTeam} {item.MatchDate}</Text>
-//           </View>
-//           <View style={{width: 50, height: 50, backgroundColor: 'skyblue'}} > 
-//           </View>
-//         </View>
-
-  // {!item.image_url
-  //         ? <View style={styles.itemImage}>
-  //             <Text>No image</Text>
-  //           </View>
-  //         : <Image
-  //             source={{ uri: item.image_url }}
-  //             resizeMode={'cover'}
-  //             style={styles.itemImage}
-  //           />}
-  //       <Text numberOfLines={3} style={styles.itemTitle}>
-  //         {item.name_group_sp}
-  //       </Text>
-  //       <View style={styles.itemFooter}>
-  //         <Text>Mínimo: {item.min_sale_amount_prod}</Text>
-  //         <Text>UxB: {item.amount_prod}</Text>
-  //         <Text
-  //           style={
-  //             !item.clearance ? styles.itemPrice : styles.itemPriceClearance
-  //           }>
-  //           {item.price_prod}
-  //         </Text>
-  //       </View>
-
    _getItemLayout = (data, index) => {
-    // const productHeight = PRODUCT_ITEM_HEIGHT + PRODUCT_ITEM_MARGIN;
-    // return {
-    //   length: productHeight,
-    //   offset: productHeight * index,
-    //   index,
+    
     };
 
- componentWillMount() {
+ componentDidMount() {
   this.loadFeed();
-    //this.timer = setInterval(()=> this.loadFeed(), 1000)
   }
 
   render(){
@@ -115,10 +75,6 @@ loadFeed(){
             data={this.state.dataSource}
             keyExtractor={(item, index) => index.toString()}
             renderItem={this._renderItem}
-            //getItemLayout={this._getItemLayout}
-            //numColumns={numColumns}
-            //renderItem={({item}) => <Text>{item.HomeTeam} v {item.AwayTeam} {item.MatchDate}</Text>}
-            //keyExtractor={(item, index) => index}
           />
         </View>
       );

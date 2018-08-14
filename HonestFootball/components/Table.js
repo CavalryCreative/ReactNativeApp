@@ -31,7 +31,7 @@ loadFeed(){
       });
 }
 
- componentWillMount() {
+ componentDidMount() {
   this.loadFeed();
     //this.timer = setInterval(()=> this.loadFeed(), 1000)
   }
