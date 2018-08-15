@@ -1,5 +1,5 @@
-import React from 'react';
-import { StyleSheet, FlatList, ActivityIndicator, Text, View, Dimensions, ListView  } from 'react-native';
+import React, { PropTypes} from 'react';
+import { StyleSheet, FlatList, TouchableOpacity, Text, View, Dimensions, ListView  } from 'react-native';
 
 // screen sizing
 const { width, height } = Dimensions.get('window');
@@ -38,13 +38,30 @@ loadFeed(){
 
  _renderItem = data => {
     const item = data.item;
-    return ( 
+
+    // if(item.Name === props.team)
+    // {
+    //     return ( 
+    //       <View style={{flex: 1}}> 
+    //         <View>
+    //           <Text>{item.Name}</Text>
+    //           <Text>Selected</Text>
+    //         </View>          
+    //       </View>
+    //     );
+    // }
+    // else
+    // {
+         return ( 
           <View style={{flex: 1}}> 
-            <View>
-              <Text>{item.Name}</Text>
+            <View>              
+              <TouchableOpacity>
+                <Text>{item.Name}</Text>
+              </TouchableOpacity>
             </View>          
           </View>
-    );
+        );
+    //}  
   };
 
    _getItemLayout = (data, index) => {
@@ -60,7 +77,7 @@ loadFeed(){
      return (
         <View style={styles.container}>
            <FlatList
-           scrollEnabled={false}
+            scrollEnabled={false}
             data={this.state.dataSource}
             keyExtractor={(item, index) => index.toString()}
             renderItem={this._renderItem}
@@ -69,6 +86,11 @@ loadFeed(){
       );
   }
 }
+
+// Settings.propTypes = {
+//   team: PropTypes.string,
+//   onTeamUpdate: PropTypes.func.isRequired,
+// }
 
 const styles = StyleSheet.create({
   container: {

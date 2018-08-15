@@ -38,7 +38,10 @@ loadFeed(){
 
  _renderItem = data => {
     const item = data.item;
-    return ( 
+
+    if (item.FullTimeScore === '[-]')
+    {
+      return ( 
           <View style={{flex: 1, flexDirection: 'row'}}>  
             <View style={styles.leftitem}>
               <Text>{item.HomeTeam} v {item.AwayTeam}</Text>
@@ -47,7 +50,22 @@ loadFeed(){
               <Text>{item.MatchDate}</Text>
             </View>
            </View>
-    );
+      );
+    }
+    else
+    {
+      return ( 
+          <View style={{flex: 1, flexDirection: 'row'}}>  
+            <View style={styles.leftitem}>
+              <Text>{item.HomeTeam} v {item.AwayTeam}</Text>
+            </View>
+            <View style={styles.rightitem}>
+              <Text>{item.FullTimeScore}</Text>
+            </View>
+           </View>
+      );
+    }
+    
   };
 
    _getItemLayout = (data, index) => {
