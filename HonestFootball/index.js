@@ -10,7 +10,7 @@ let store = createStore(honestFootballReducers)
 
 class HonestFootball extends Component {
 	render() {
-		//console.log('Redux state:', this.state.getState())
+		//console.log('Redux state:', store.getState())
 
 		return(
 			<Provider store={store}>

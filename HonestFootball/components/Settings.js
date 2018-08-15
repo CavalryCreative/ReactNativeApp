@@ -1,5 +1,5 @@
 import React, { PropTypes} from 'react';
-import { StyleSheet, FlatList, TouchableOpacity, Text, View, Dimensions, ListView  } from 'react-native';
+import { StyleSheet, TextInput, FlatList, TouchableOpacity, Text, View, Dimensions, ListView  } from 'react-native';
 
 // screen sizing
 const { width, height } = Dimensions.get('window');
@@ -82,6 +82,10 @@ loadFeed(){
             keyExtractor={(item, index) => index.toString()}
             renderItem={this._renderItem}
           />
+          <TextInput 
+            //value={props.team}
+            //onChangeText={props.onTeamUpdate} 
+            />
         </View>
       );
   }
