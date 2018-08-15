@@ -14,6 +14,8 @@ export default class Settings extends React.Component {
 
   constructor(props){
     super(props);
+
+    console.log(props);
     this.state ={ 
       
     };
@@ -83,8 +85,8 @@ loadFeed(){
             renderItem={this._renderItem}
           />
           <TextInput 
-            //value={props.team}
-            //onChangeText={props.onTeamUpdate} 
+            value={this.props.team}
+            onChangeText={this.props.onTeamUpdate} 
             />
         </View>
       );
