@@ -18,7 +18,7 @@ export function getTeamName(){
 			team: result[0][1],
 		}))
 		.catch(ex => reject(ex))
-	)}
+	})
 }
 
 export function clearTeamInfo(){

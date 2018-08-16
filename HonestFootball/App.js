@@ -15,10 +15,26 @@ import {
 
 import RSwiper from './components/MultiSwiper';
 import routes from './routes'
-import { getTeamName } from '/storageManager'
+import { getTeamName } from './storageManager'
 
 type Props = {};
 export default class App extends Component<Props> {
+
+componentDidMount() {
+  
+  getTeamName().
+    then(data =>{
+      console.log('Restored data: ', data)
+
+      if(data.team)
+      {
+         this.props.onRehydrateTeamName(data.team)
+       }     
+    })
+
+  this.loadFeed();
+    //this.timer = setInterval(()=> this.loadFeed(), 5000);
+  }
 
    constructor(props){
     super(props);
@@ -52,17 +68,6 @@ export default class App extends Component<Props> {
         error => this.setState({ error, isLoading: false })
       });
 }
-
- componentDidMount() {
-  
-  getTeamName().
-    then(data =>{
-      console.log('Restored data: ', data)
-    })
-
-  this.loadFeed();
-    //this.timer = setInterval(()=> this.loadFeed(), 5000);
-  }
   
   render() {
      if(this.state.isLoading){

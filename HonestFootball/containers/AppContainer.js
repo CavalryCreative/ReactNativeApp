@@ -13,7 +13,6 @@ const mapDispatchToProps = (dispatch) => (
 	{		
 		onRehydrateTeamName: (name) => {
 			dispatch(rehydrateTeamName(name))
-			//console.log('onTeamUpdate: ', name)
 		},
 	}
 )
@@ -21,4 +20,4 @@ const mapDispatchToProps = (dispatch) => (
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(Settings)
+)(App)

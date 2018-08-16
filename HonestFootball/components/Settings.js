@@ -1,7 +1,7 @@
 import React, { PropTypes} from 'react';
 import { StyleSheet, FlatList, TouchableOpacity, Text, View, Dimensions, ListView, AsyncStorage  } from 'react-native';
 
-import { setTeamName } from './storageManager'
+import { setTeamName } from '../storageManager'
 
 // screen sizing
 const { width, height } = Dimensions.get('window');
