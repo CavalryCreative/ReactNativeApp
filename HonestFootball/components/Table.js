@@ -22,7 +22,7 @@ loadFeed(){
           isLoading: false,
           dataSource: responseJson.Standings,
         }, function(){
-          console.log(responseJson.Standings);
+          
         });
 
       })

@@ -1,5 +1,7 @@
 import React, { PropTypes} from 'react';
-import { StyleSheet, TextInput, FlatList, TouchableOpacity, Text, View, Dimensions, ListView  } from 'react-native';
+import { StyleSheet, FlatList, TouchableOpacity, Text, View, Dimensions, ListView, AsyncStorage  } from 'react-native';
+
+import { setTeamName } from './storageManager'
 
 // screen sizing
 const { width, height } = Dimensions.get('window');
@@ -15,7 +17,6 @@ export default class Settings extends React.Component {
   constructor(props){
     super(props);
 
-    console.log(props);
     this.state ={ 
       
     };
@@ -40,30 +41,34 @@ loadFeed(){
 
  _renderItem = data => {
     const item = data.item;
+    const teamName = item.Name;
+    //console.log('Settings: ', this.props.team)
 
-    // if(item.Name === props.team)
-    // {
-    //     return ( 
-    //       <View style={{flex: 1}}> 
-    //         <View>
-    //           <Text>{item.Name}</Text>
-    //           <Text>Selected</Text>
-    //         </View>          
-    //       </View>
-    //     );
-    // }
-    // else
-    // {
+    if(item.Name === this.props.team)
+    {
+        return ( 
+          <View style={{flex: 1}}> 
+            <View>
+              <Text>{item.Name} Selected</Text>
+            </View>          
+          </View>
+        );
+    }
+    else
+    {
          return ( 
           <View style={{flex: 1}}> 
             <View>              
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => { goPressHandler(item.Name) }} //this.props.onTeamUpdate({teamName})
+                value={item.Name}
+                >
                 <Text>{item.Name}</Text>
               </TouchableOpacity>
             </View>          
           </View>
         );
-    //}  
+    }  
   };
 
    _getItemLayout = (data, index) => {
@@ -83,14 +88,17 @@ loadFeed(){
             data={this.state.dataSource}
             keyExtractor={(item, index) => index.toString()}
             renderItem={this._renderItem}
-          />
-          <TextInput 
-            value={this.props.team}
-            onChangeText={this.props.onTeamUpdate} 
-            />
+          />       
         </View>
+
+         // <TextInput
+          //   onChangeText={this.props.onTeamUpdate} />
       );
   }
+}
+
+function goPressHandler(team){
+  setTeamName(team);
 }
 
 // Settings.propTypes = {

@@ -3,7 +3,7 @@ import { AppRegistry } from 'react-native'
 import { Provider} from 'react-redux'
 import { createStore } from 'redux'
 
-import App from './App'
+import AppContainer from './containers/AppContainer'
 import honestFootballReducers from './reducers'
 
 let store = createStore(honestFootballReducers)
@@ -14,7 +14,7 @@ class HonestFootball extends Component {
 
 		return(
 			<Provider store={store}>
-				<App />
+				<AppContainer />
 			</Provider>
 			)
 	}

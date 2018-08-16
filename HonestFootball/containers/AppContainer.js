@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
-import {updateTeam} from '../actions'
-import Settings from '../components/Settings'
+import {rehydrateTeamName} from '../actions'
+import App from '../App'
 
 const mapStateToProps = (state) => (
 	{
@@ -11,9 +11,9 @@ const mapStateToProps = (state) => (
 
 const mapDispatchToProps = (dispatch) => (
 	{		
-		onTeamUpdate: (value) => {
-			dispatch(updateTeam(value))
-			console.log('onTeamUpdate: ', value)
+		onRehydrateTeamName: (name) => {
+			dispatch(rehydrateTeamName(name))
+			//console.log('onTeamUpdate: ', name)
 		},
 	}
 )

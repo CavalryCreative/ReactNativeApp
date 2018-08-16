@@ -15,6 +15,7 @@ import {
 
 import RSwiper from './components/MultiSwiper';
 import routes from './routes'
+import { getTeamName } from '/storageManager'
 
 type Props = {};
 export default class App extends Component<Props> {
@@ -54,6 +55,11 @@ export default class App extends Component<Props> {
 
  componentDidMount() {
   
+  getTeamName().
+    then(data =>{
+      console.log('Restored data: ', data)
+    })
+
   this.loadFeed();
     //this.timer = setInterval(()=> this.loadFeed(), 5000);
   }
