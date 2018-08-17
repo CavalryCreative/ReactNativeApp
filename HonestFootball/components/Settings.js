@@ -60,7 +60,7 @@ loadFeed(){
           <View style={{flex: 1}}> 
             <View>              
               <TouchableOpacity
-                onPress={() => { goPressHandler(item.Name) }} //this.props.onTeamUpdate({teamName})
+                onPress={() => { goPressHandler(item.Name) }} //goPressHandler(this.props.navHandler, item.Name) }
                 value={item.Name}
                 >
                 <Text>{item.Name}</Text>
@@ -97,8 +97,13 @@ loadFeed(){
   }
 }
 
-function goPressHandler(team){
-  setTeamName(team);
+function goPressHandler(team){//navHandler
+  setTeamName(team)
+  // .then(() => navHandler())
+  //   .catch(ex => {
+  //     console.log('Error storing customer name and account, proceeding anyway. Details:', ex)
+  //     navHandler()
+  //   })
 }
 
 // Settings.propTypes = {

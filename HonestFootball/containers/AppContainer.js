@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
 import {rehydrateTeamName} from '../actions'
-import App from '../App'
+import App from '../components/App'
 
 const mapStateToProps = (state) => (
 	{

@@ -15,6 +15,7 @@
     "react-native-tab-view": "^1.0.2",
     "react-native-tabs": "^1.0.9",
     "react-native-vector-icons": "^5.0.0",
+    "react-navigation": "^2.11.2",
     "react-redux": "^5.0.7",
     "react-timer-mixin": "^0.13.3",
     "redux": "^4.0.0"

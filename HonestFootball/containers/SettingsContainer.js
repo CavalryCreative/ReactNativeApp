@@ -3,9 +3,10 @@ import { connect } from 'react-redux'
 import {updateTeam} from '../actions'
 import Settings from '../components/Settings'
 
-const mapStateToProps = (state) => (
+const mapStateToProps = (state, props) => (
 	{
 		team: state.team,
+		navHandler: props.navHandler,
 	}
 )
 

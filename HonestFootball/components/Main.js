@@ -13,27 +13,16 @@ import {
   View
 } from 'react-native';
 
-import RSwiper from './components/MultiSwiper';
-import routes from './routes'
-import { getTeamName } from './storageManager'
+import RSwiper from './MultiSwiper'
+import routes from '../routes'
 
 type Props = {};
-export default class App extends Component<Props> {
+export default class Main extends Component<Props> {
 
 componentDidMount() {
   
-  getTeamName().
-    then(data =>{
-      console.log('Restored data: ', data)
-
-      if(data.team)
-      {
-         this.props.onRehydrateTeamName(data.team)
-       }     
-    })
-
   this.loadFeed();
-    //this.timer = setInterval(()=> this.loadFeed(), 5000);
+  this.timer = setInterval(()=> this.loadFeed(), 60000);
   }
 
    constructor(props){
