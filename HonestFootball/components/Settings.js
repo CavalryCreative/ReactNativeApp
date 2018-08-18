@@ -1,7 +1,7 @@
 import React, { PropTypes} from 'react';
 import { StyleSheet, FlatList, TouchableOpacity, Text, View, Dimensions, ListView, AsyncStorage  } from 'react-native';
 
-import { setTeamName } from '../storageManager'
+import { setTeamId } from '../storageManager'
 
 // screen sizing
 const { width, height } = Dimensions.get('window');
@@ -41,10 +41,8 @@ loadFeed(){
 
  _renderItem = data => {
     const item = data.item;
-    const teamName = item.Name;
-    //console.log('Settings: ', this.props.team)
 
-    if(item.Name === this.props.team)
+    if(item.APIId === this.props.team)
     {
         return ( 
           <View style={{flex: 1}}> 
@@ -60,8 +58,7 @@ loadFeed(){
           <View style={{flex: 1}}> 
             <View>              
               <TouchableOpacity
-                onPress={() => { goPressHandler(item.Name) }} //goPressHandler(this.props.navHandler, item.Name) }
-                value={item.Name}
+                onPress={() => { goPressHandler(item.APIId) }} //goPressHandler(this.props.navHandler, item.Name) }
                 >
                 <Text>{item.Name}</Text>
               </TouchableOpacity>
@@ -98,7 +95,8 @@ loadFeed(){
 }
 
 function goPressHandler(team){//navHandler
-  setTeamName(team)
+  //console.log('Settings: ', team.toString())
+  setTeamId(team.toString());
   // .then(() => navHandler())
   //   .catch(ex => {
   //     console.log('Error storing customer name and account, proceeding anyway. Details:', ex)

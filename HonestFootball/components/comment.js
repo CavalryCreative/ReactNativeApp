@@ -18,7 +18,22 @@ loadData(){
   
   let response = this.props.dataSource;
 
+  if (!Array.isArray(response) || !response.length)
+  {
     this.setState({
+          
+           HomeComment: 'No game today',
+           AwayComment: 'No game today',
+           Minute: '',
+           Score: '',
+        }, function(){         
+        });
+  }
+  else
+  {
+    if(response[0].LatestEvent !== null)
+    {
+        this.setState({
           
            HomeComment: response[0].LatestEvent.HomeComment,
            AwayComment: response[0].LatestEvent.AwayComment,
@@ -26,6 +41,19 @@ loadData(){
            Score: response[0].LatestEvent.Score
         }, function(){         
         });
+    }
+    else
+    {
+      this.setState({
+          
+           HomeComment: 'Something cocked up',
+           AwayComment: 'Something cocked up',
+           Minute: '',
+           Score: '',
+        }, function(){         
+        });
+    }
+  }   
 }
 
  componentDidMount() {

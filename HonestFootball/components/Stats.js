@@ -27,11 +27,37 @@ export default class Stats extends React.Component {
 loadData(){
   
   let response = this.props.dataSource;
-  const totalPossession = parseInt(response[0].MatchStats.HomeTeamPossessionTime) + parseInt(response[0].MatchStats.AwayTeamPossessionTime);
-  const totalShots = parseInt(response[0].MatchStats.HomeTeamTotalShots) + parseInt(response[0].MatchStats.AwayTeamTotalShots);
-  const totalShotsOnTarget = parseInt(response[0].MatchStats.HomeTeamOnGoalShots) + parseInt(response[0].MatchStats.AwayTeamOnGoalShots);
-  const totalCorners = parseInt(response[0].MatchStats.HomeTeamCorners) + parseInt(response[0].MatchStats.AwayTeamCorners);
-  const totalFouls = parseInt(response[0].MatchStats.HomeTeamFouls) + parseInt(response[0].MatchStats.AwayTeamFouls);
+
+  if (!Array.isArray(response) || !response.length)
+  {
+       this.setState({
+          HomePossession: '',
+          AwayPossession: '',
+          TotalPossession: '',
+          HomeShots: '',
+          AwayShots: '',
+          TotalShots: '',
+          HomeShotsOnTarget: '',
+          AwayShotsOnTarget: '',
+          TotalShotsOnTarget: '',
+          HomeCorners: '',
+          AwayCorners: '',
+          TotalCorners: '',
+          HomeFouls: '',
+          AwayFouls: '',
+          TotalFouls: ''
+        }, function(){
+        });
+  }
+  else
+  {
+    if(response[0].LatestEvent !== null)
+    {
+        const totalPossession = parseInt(response[0].MatchStats.HomeTeamPossessionTime) + parseInt(response[0].MatchStats.AwayTeamPossessionTime);
+        const totalShots = parseInt(response[0].MatchStats.HomeTeamTotalShots) + parseInt(response[0].MatchStats.AwayTeamTotalShots);
+        const totalShotsOnTarget = parseInt(response[0].MatchStats.HomeTeamOnGoalShots) + parseInt(response[0].MatchStats.AwayTeamOnGoalShots);
+        const totalCorners = parseInt(response[0].MatchStats.HomeTeamCorners) + parseInt(response[0].MatchStats.AwayTeamCorners);
+        const totalFouls = parseInt(response[0].MatchStats.HomeTeamFouls) + parseInt(response[0].MatchStats.AwayTeamFouls);
 
     this.setState({
           HomePossession: parseInt(response[0].MatchStats.HomeTeamPossessionTime),
@@ -51,6 +77,29 @@ loadData(){
           TotalFouls: totalFouls
         }, function(){
         });
+    }
+    else
+    {
+         this.setState({
+          HomePossession: '',
+          AwayPossession: '',
+          TotalPossession: '',
+          HomeShots: '',
+          AwayShots: '',
+          TotalShots: '',
+          HomeShotsOnTarget: '',
+          AwayShotsOnTarget: '',
+          TotalShotsOnTarget: '',
+          HomeCorners: '',
+          AwayCorners: '',
+          TotalCorners: '',
+          HomeFouls: '',
+          AwayFouls: '',
+          TotalFouls: ''
+        }, function(){
+        });
+    }
+  }
 }
 
  componentDidMount() {

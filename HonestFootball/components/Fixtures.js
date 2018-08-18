@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, FlatList, ActivityIndicator, Text, View, Dimensions, ListView  } from 'react-native';
 
+import { getTeamId } from '../storageManager'
+
 // screen sizing
 const { width, height } = Dimensions.get('window');
 // orientation must fixed
@@ -21,14 +23,25 @@ export default class Fixtures extends React.Component {
 
 loadFeed(){
   
-  return fetch('http://honest-apps.eu-west-1.elasticbeanstalk.com/api/fixtures/9259')
+   let teamId;
+
+   getTeamId().
+      then(data =>{
+
+        if(data.team)
+        {
+          teamId = data.team;    
+        }     
+      })
+
+  return fetch('http://honest-apps.eu-west-1.elasticbeanstalk.com/api/fixtures/' + teamId)
       .then((response) => response.json())
       .then((responseJson) => {
 
         this.setState({
-          dataSource: responseJson.Fixtures,
+          dataSource: responseJson.Fixtures,  
         }, function(){
-          
+          console.log(responseJson.Fixtures);
         });
       })
       .catch((error) =>{

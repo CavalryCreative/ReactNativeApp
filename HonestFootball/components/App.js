@@ -8,17 +8,16 @@ import Main from './Main';
 import Settings from './Settings'
 import RSwiper from './MultiSwiper'
 
-import { getTeamName } from '../storageManager'
+import { getTeamId } from '../storageManager'
 
 type Props = {};
 export default class App extends Component<Props> {
   
   componentDidMount() {
   
-    getTeamName().
+    getTeamId().
       then(data =>{
-        //console.log('Restored data: ', data)
-
+       
         if(data.team)
         {
            this.props.onRehydrateTeamName(data.team)

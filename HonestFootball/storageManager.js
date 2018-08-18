@@ -1,18 +1,18 @@
 import React from 'react'
 import { AsyncStorage } from 'react-native'
 
-const storageTeamName = '@HonestFootball:teamName'
+const storageTeamId = '@HonestFootball:teamId'
 
-export function setTeamName(team){
+export function setTeamId(team){
 	return AsyncStorage.multiSet([
-			[storageTeamName, team]
+			[storageTeamId, team]
 		])
 } 
 
-export function getTeamName(){
+export function getTeamId(){
 	return new Promise((resolve, reject) => {
 		AsyncStorage.multiGet([
-			storageTeamName,
+			storageTeamId,
 		])
 		.then(result => resolve({
 			team: result[0][1],

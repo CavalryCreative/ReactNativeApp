@@ -69,20 +69,42 @@ loadData(){
   
   let response = this.props.dataSource;
 
+  if (!Array.isArray(response) || !response.length)
+  {
     this.setState({
-          
-          homeDataSource: response[0].HomeLineUp,
-          awayDataSource: response[0].AwayLineUp,
-          homeTeam: response[0].HomeTeam,
-          awayTeam: response[0].AwayTeam,
-        }, function(){         
-        })
-    // .catch((error) =>{
-    //     console.error(error);
-    //   });
+            
+            homeDataSource: '',
+            awayDataSource: '',
+            homeTeam: '',
+            awayTeam: '',
+          }, function(){         
+          })
+  }
+  else{
+   
+     this.setState({
+            
+            homeDataSource: response[0].HomeLineUp,
+            awayDataSource: response[0].AwayLineUp,
+            homeTeam: response[0].HomeTeam,
+            awayTeam: response[0].AwayTeam,
+          }, function(){         
+          })
+      // .catch((error) =>{
+      //     console.error(error);
+      //   });
+  }
 }
 
  _renderStartLineup = data => {
+
+  if (!Array.isArray(data) || !data.length)
+  {
+    console.log('_renderStartLineup undefined', );
+    return null
+  }
+  else
+  {
     const item = data.item;
     const isSub = String(item.IsSub);
     const isSubstituted = String(item.Substituted);
@@ -129,9 +151,20 @@ loadData(){
      {
       return null;
      }
+  } 
   };
 
    _renderSubs = data => {
+
+  if (!Array.isArray(data) || !data.length)
+  {
+    console.log('_renderSubs undefined', );
+    return null
+  }
+  else
+  {
+    console.log('_renderSubs defined', );
+
     const item = data.item;
     const isSub = String(item.IsSub);
     const isSubstituted = String(item.Substituted);
@@ -178,6 +211,7 @@ loadData(){
      {
       return null;
      }
+  }  
   };
 
   render(){

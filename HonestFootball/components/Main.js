@@ -15,6 +15,7 @@ import {
 
 import RSwiper from './MultiSwiper'
 import routes from '../routes'
+import { getTeamId } from '../storageManager'
 
 type Props = {};
 export default class Main extends Component<Props> {
@@ -40,8 +41,18 @@ componentDidMount() {
   }
 
   loadFeed(){
-  
-  return fetch('http://honest-apps.eu-west-1.elasticbeanstalk.com/api/feed/9259')
+   let teamId;
+
+   getTeamId().
+      then(data =>{
+
+        if(data.team)
+        {
+          teamId = data.team;        
+        }     
+      })
+
+  return fetch('http://honest-apps.eu-west-1.elasticbeanstalk.com/api/feed/' + teamId)
       .then((response) => response.json())
       .then((responseJson) => {
 
@@ -54,7 +65,12 @@ componentDidMount() {
 
       })
       .catch((error) =>{
-        error => this.setState({ error, isLoading: false })
+         this.setState({
+          isLoading: false,
+          dataSource: ''
+        }, function(){
+          
+        });
       });
 }
   
