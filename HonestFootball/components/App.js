@@ -13,40 +13,58 @@ import { getTeamId } from '../storageManager'
 type Props = {};
 export default class App extends Component<Props> {
   
-  componentDidMount() {
-  
-    getTeamId().
+   constructor(props){
+    super(props);
+    this.state ={ 
+      teamId: ''
+    };
+  }
+
+componentDidMount() {
+
+   getTeamId().
       then(data =>{
        
         if(data.team)
         {
-           this.props.onRehydrateTeamName(data.team)
-         }     
+           this.props.onRehydrateTeamName(data.team);
+
+            this.setState({
+              teamId: data.team,
+            }, function(){
+              
+            });
+        } 
       })
   }
 
-  _renderScene(route, navigator){
-      switch(route.name){
-        case 'Settings':
-          return <Settings /> //navHandler={() => { navigator.push(routes.main) }}
-        case 'Main':
-          return <Main />
-        default:
-          return <Main />
-      }
-  }
+  // _renderScene(route, navigator){
+  //     switch(route.name){
+  //       case 'Settings':
+  //         return <Settings /> //navHandler={() => { navigator.push(routes.main) }}
+  //       case 'Main':
+  //         return <Main />
+  //       default:
+  //         return <Main />
+  //     }
+  // }
 
   render() {
 
-    const MainNavigator = createStackNavigator({
+    // const MainNavigator = createStackNavigator({
 
-        Settings: {screen:'Settings'},
-        Main: {screen:'Main'}
-    });
+    //     Settings: {screen:'Settings'},
+    //     Main: {screen:'Main'}
+    // });
 
-     return(
-        <Main />
-      )
+        if (this.state.teamId)
+        {
+          return <Main teamId = {this.state.teamId} />
+        }
+        else
+        {
+          return <Settings teamId = {this.state.teamId} />
+        }
   }
 }
 

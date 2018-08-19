@@ -21,7 +21,7 @@ type Props = {};
 export default class Main extends Component<Props> {
 
 componentDidMount() {
-  
+
   this.loadFeed();
   this.timer = setInterval(()=> this.loadFeed(), 60000);
   }
@@ -36,21 +36,20 @@ componentDidMount() {
         {key: 'fixtures'},
       ],
       isLoading: true,
-      dataSource: ''
+      dataSource: '',
+      teamId: ''
     };
   }
 
+  componentWillUnmount(){
+    clearInterval();
+  }
+
   loadFeed(){
-   let teamId;
 
-   getTeamId().
-      then(data =>{
+  let teamId = this.props.teamId;
 
-        if(data.team)
-        {
-          teamId = data.team;        
-        }     
-      })
+console.log('Main loadFeed: ', teamId);    
 
   return fetch('http://honest-apps.eu-west-1.elasticbeanstalk.com/api/feed/' + teamId)
       .then((response) => response.json())
@@ -58,7 +57,8 @@ componentDidMount() {
 
         this.setState({
           isLoading: false,
-          dataSource: responseJson.Matches
+          dataSource: responseJson.Matches,
+          teamId: this.props.teamId,
         }, function(){
           
         });

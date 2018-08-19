@@ -21,6 +21,10 @@ export default class Fixtures extends React.Component {
     };
   }
 
+componentDidMount() {
+  this.loadFeed();
+  }
+
 loadFeed(){
   
    let teamId;
@@ -41,7 +45,7 @@ loadFeed(){
         this.setState({
           dataSource: responseJson.Fixtures,  
         }, function(){
-          console.log(responseJson.Fixtures);
+         
         });
       })
       .catch((error) =>{
@@ -84,10 +88,6 @@ loadFeed(){
    _getItemLayout = (data, index) => {
     
     };
-
- componentDidMount() {
-  this.loadFeed();
-  }
 
   render(){
 

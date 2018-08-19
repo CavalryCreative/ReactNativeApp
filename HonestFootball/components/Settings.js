@@ -1,5 +1,5 @@
 import React, { PropTypes} from 'react';
-import { StyleSheet, FlatList, TouchableOpacity, Text, View, Dimensions, ListView, AsyncStorage  } from 'react-native';
+import { StyleSheet, FlatList, TouchableOpacity, Text, View, Dimensions, AsyncStorage  } from 'react-native';
 
 import { setTeamId } from '../storageManager'
 
@@ -22,6 +22,10 @@ export default class Settings extends React.Component {
     };
   }
 
+  componentDidMount() {
+    this.loadFeed();
+  }
+
 loadFeed(){
   
   return fetch('http://honest-apps.eu-west-1.elasticbeanstalk.com/api/teams')
@@ -42,7 +46,7 @@ loadFeed(){
  _renderItem = data => {
     const item = data.item;
 
-    if(item.APIId === this.props.team)
+    if(item.APIId === this.props.teamId)
     {
         return ( 
           <View style={{flex: 1}}> 
@@ -71,10 +75,6 @@ loadFeed(){
    _getItemLayout = (data, index) => {
     
     };
-
- componentDidMount() {
-  this.loadFeed();
-  }
 
   render(){
 
