@@ -35,11 +35,11 @@ export default class RSwiper extends React.Component {
             showsPagination={false}
             index={1}>
             <View style={styles.slide1}>
-               <LineupsTabView dataSource = {this.props.dataSource} /> 
+               <LineupsTabView dataSource = {this.props.dataSource} teamId={this.props.teamId} /> 
             </View>
 
             <View style={styles.slide2}>
-               <Comment dataSource = {this.props.dataSource} />
+               <Comment dataSource = {this.props.dataSource} teamId={this.props.teamId} />
             </View>
 
             <View style={styles.slide3}>

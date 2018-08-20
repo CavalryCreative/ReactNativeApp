@@ -28,7 +28,10 @@ export default class Settings extends React.Component {
 
 loadFeed(){
   
-  return fetch('http://honest-apps.eu-west-1.elasticbeanstalk.com/api/teams')
+  const somePromise = new Promise(r => fetch('http://honest-apps.eu-west-1.elasticbeanstalk.com/api/teams'));
+  const cancelable = makeCancelable(somePromise); 
+
+  return fetch('http://honest-apps.eu-west-1.elasticbeanstalk.com/api/teams')//cancelable.promise
       .then((response) => response.json())
       .then((responseJson) => {
 
@@ -38,9 +41,10 @@ loadFeed(){
           
         });
       })
-      .catch((error) =>{
-        console.error(error);
-      });
+     .catch(({isCanceled, ...error}) => console.log('isCanceled', isCanceled));
+
+     // Cancel promise
+      cancelable.cancel();
 }
 
  _renderItem = data => {
@@ -65,6 +69,7 @@ loadFeed(){
                 onPress={() => { goPressHandler(item.APIId) }} //goPressHandler(this.props.navHandler, item.Name) }
                 >
                 <Text>{item.Name}</Text>
+                <Text>{item.APIId}</Text>
               </TouchableOpacity>
             </View>          
           </View>
@@ -103,6 +108,24 @@ function goPressHandler(team){//navHandler
   //     navHandler()
   //   })
 }
+
+const makeCancelable = (promise) => {
+  let hasCanceled_ = false;
+
+  const wrappedPromise = new Promise((resolve, reject) => {
+    promise.then(
+      val => hasCanceled_ ? reject({isCanceled: true}) : resolve(val),
+      error => hasCanceled_ ? reject({isCanceled: true}) : reject(error)
+    );
+  });
+
+  return {
+    promise: wrappedPromise,
+    cancel() {
+      hasCanceled_ = true;
+    },
+  };
+};
 
 // Settings.propTypes = {
 //   team: PropTypes.string,

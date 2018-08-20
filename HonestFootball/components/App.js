@@ -1,7 +1,6 @@
 
 import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
-import { createStackNavigator } from 'react-navigation'
 
 import {routes} from '../routes'
 import Main from './Main';
@@ -38,24 +37,7 @@ componentDidMount() {
       })
   }
 
-  // _renderScene(route, navigator){
-  //     switch(route.name){
-  //       case 'Settings':
-  //         return <Settings /> //navHandler={() => { navigator.push(routes.main) }}
-  //       case 'Main':
-  //         return <Main />
-  //       default:
-  //         return <Main />
-  //     }
-  // }
-
   render() {
-
-    // const MainNavigator = createStackNavigator({
-
-    //     Settings: {screen:'Settings'},
-    //     Main: {screen:'Main'}
-    // });
 
         if (this.state.teamId)
         {
@@ -63,17 +45,10 @@ componentDidMount() {
         }
         else
         {
-          return <Settings teamId = {this.state.teamId} />
+          return <Settings />
         }
   }
 }
-
- //<MainNavigator
-          // initialRoute={routes.settings}
-  //        renderScene={this.renderScene}
-   //       style={styles.container}
-   //       sceneStyle={styles.sceneContainer}
-   //     />
 
 const styles = StyleSheet.create({
   container: {

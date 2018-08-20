@@ -9,10 +9,11 @@ import Fixtures  from './Fixtures'
 const LineupRoute = (props) => {
   //<View style={[styles.container, { backgroundColor: '#ff4081' }]} />
   const response = props.dataSource;
+  const teamId = props.teamId;
 
   if (response !== undefined)
   {
-    return <Lineup dataSource={response} />
+    return <Lineup dataSource={response} teamId={teamId} />
   }
   else
   {
@@ -36,6 +37,7 @@ export default class LineupsTabView extends React.Component {
     super(props);
 
 let response = this.props.dataSource;
+let teamId = this.props.teamId;
 
      this.state = {
       index: 0,
@@ -44,18 +46,19 @@ let response = this.props.dataSource;
         { key: 'table', title: 'table' },
         { key: 'fixtures', title: 'fixtures' },
       ],
-      dataSource: response
+      dataSource: response,
+      teamId: teamId
     };
   }
 
 renderScene = ({ route }) => {
    switch (route.key) {
      case 'lineup':
-       return <Lineup dataSource={this.state.dataSource} />;
+       return <Lineup dataSource={this.state.dataSource} teamId={this.state.teamId} />;
      case 'table':
        return <LeagueTable />;
       case 'fixtures':
-       return <Fixtures />;
+       return <Fixtures teamId={this.state.teamId} />;
      default:
       return null;
   }

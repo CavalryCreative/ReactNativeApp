@@ -42,14 +42,12 @@ componentDidMount() {
   }
 
   componentWillUnmount(){
-    clearInterval();
+    clearInterval(this.timer);
   }
 
   loadFeed(){
 
   let teamId = this.props.teamId;
-
-console.log('Main loadFeed: ', teamId);    
 
   return fetch('http://honest-apps.eu-west-1.elasticbeanstalk.com/api/feed/' + teamId)
       .then((response) => response.json())
@@ -84,7 +82,7 @@ console.log('Main loadFeed: ', teamId);
     }
 
     return (   
-         <RSwiper dataSource = {this.state.dataSource} />
+         <RSwiper dataSource = {this.state.dataSource} teamId = {this.state.teamId} />
     );
   }
 }

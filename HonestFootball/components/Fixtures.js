@@ -27,16 +27,7 @@ componentDidMount() {
 
 loadFeed(){
   
-   let teamId;
-
-   getTeamId().
-      then(data =>{
-
-        if(data.team)
-        {
-          teamId = data.team;    
-        }     
-      })
+   let teamId = this.props.teamId;
 
   return fetch('http://honest-apps.eu-west-1.elasticbeanstalk.com/api/fixtures/' + teamId)
       .then((response) => response.json())
@@ -94,7 +85,7 @@ loadFeed(){
      return (
         <View style={styles.container}>
            <FlatList
-           scrollEnabled={false}
+           scrollEnabled={true}
             data={this.state.dataSource}
             keyExtractor={(item, index) => index.toString()}
             renderItem={this._renderItem}

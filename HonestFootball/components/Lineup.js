@@ -98,13 +98,6 @@ loadData(){
 
  _renderStartLineup = data => {
 
-  if (!Array.isArray(data) || !data.length)
-  {
-    console.log('_renderStartLineup undefined', );
-    return null
-  }
-  else
-  {
     const item = data.item;
     const isSub = String(item.IsSub);
     const isSubstituted = String(item.Substituted);
@@ -151,19 +144,9 @@ loadData(){
      {
       return null;
      }
-  } 
   };
 
    _renderSubs = data => {
-
-  if (!Array.isArray(data) || !data.length)
-  {
-    console.log('_renderSubs undefined', );
-    return null
-  }
-  else
-  {
-    console.log('_renderSubs defined', );
 
     const item = data.item;
     const isSub = String(item.IsSub);
@@ -211,12 +194,21 @@ loadData(){
      {
       return null;
      }
-  }  
   };
 
   render(){
 
-     return (
+  if (this.state.homeTeam === '')
+  {
+    return(
+         <View style={{flex: 1}}>  
+        <Text>No game today bellend</Text>
+      </View>
+      )    
+  }
+  else
+  {
+   return (
         <View style={{flex: 1, flexDirection: 'row'}}>  
             <View style={styles.leftitem}>
               <Text>{this.state.homeTeam}</Text>
@@ -252,6 +244,7 @@ loadData(){
             </View>
            </View>
       );
+    } 
   }
 }
 
