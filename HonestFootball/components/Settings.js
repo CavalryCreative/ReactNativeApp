@@ -1,7 +1,7 @@
 import React, { PropTypes} from 'react';
 import { StyleSheet, FlatList, TouchableOpacity, Text, View, Dimensions, AsyncStorage  } from 'react-native';
 
-import { setTeamId } from '../storageManager'
+import { setTeamId, getTeamId } from '../storageManager'
 
 // screen sizing
 const { width, height } = Dimensions.get('window');
@@ -49,8 +49,9 @@ loadFeed(){
 
  _renderItem = data => {
     const item = data.item;
+    const selectedTeamId = this.props.team;
 
-    if(item.APIId === this.props.teamId)
+    if(item.APIId.toString() === selectedTeamId.toString())
     {
         return ( 
           <View style={{flex: 1}}> 
@@ -69,7 +70,6 @@ loadFeed(){
                 onPress={() => { goPressHandler(item.APIId) }} //goPressHandler(this.props.navHandler, item.Name) }
                 >
                 <Text>{item.Name}</Text>
-                <Text>{item.APIId}</Text>
               </TouchableOpacity>
             </View>          
           </View>

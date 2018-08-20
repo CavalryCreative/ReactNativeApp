@@ -45,7 +45,7 @@ componentDidMount() {
         }
         else
         {
-          return <Settings />
+          return <Settings teamId={this.state.teamId} />
         }
   }
 }

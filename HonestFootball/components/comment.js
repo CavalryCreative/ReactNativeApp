@@ -71,7 +71,6 @@ let selectedTeamId = this.props.teamId.toString();
 
     if(homeTeamId === selectedTeamId)
     {
-      console.log('Comment render home team: ', this.state.HomeTeamId, this.props.teamId)
        return (
             <View>
               <Text>{this.state.Minute}</Text>
@@ -82,7 +81,6 @@ let selectedTeamId = this.props.teamId.toString();
     }
     else
     {
-      console.log('Comment render away team: ', this.state.AwayTeamId, this.props.teamId)
         return (
             <View>
               <Text>{this.state.Minute}</Text>
