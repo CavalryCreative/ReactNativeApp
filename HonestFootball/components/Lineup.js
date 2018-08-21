@@ -54,47 +54,7 @@ export default class Lineup extends React.Component {
 
   constructor(props){
     super(props);
-    this.state ={ 
-      isLoading: true,
-      homeTeam: '',
-      awayTeam: '',
-    };
   }
-
-componentDidMount() {
-  this.loadData();
-  }
-  
-loadData(){
-  
-  let response = this.props.dataSource;
-
-  if (!Array.isArray(response) || !response.length)
-  {
-    this.setState({
-            
-            homeDataSource: '',
-            awayDataSource: '',
-            homeTeam: '',
-            awayTeam: '',
-          }, function(){         
-          })
-  }
-  else{
-   
-     this.setState({
-            
-            homeDataSource: response[0].HomeLineUp,
-            awayDataSource: response[0].AwayLineUp,
-            homeTeam: response[0].HomeTeam,
-            awayTeam: response[0].AwayTeam,
-          }, function(){         
-          })
-      // .catch((error) =>{
-      //     console.error(error);
-      //   });
-  }
-}
 
  _renderStartLineup = data => {
 
@@ -120,7 +80,7 @@ loadData(){
     {
        retStr = playerNumber + ' ' + playerSurname;
 
-//create array goals scored
+      //create array goals scored
       let goals = [];
 
       for (var i = 0; i < goalsScored; i++) {
@@ -198,7 +158,7 @@ loadData(){
 
   render(){
 
-  if (this.state.homeTeam === '')
+  if (this.props.dataSource[0].HomeTeam === '')
   {
     return(
          <View style={{flex: 1}}>  
@@ -211,33 +171,33 @@ loadData(){
    return (
         <View style={{flex: 1, flexDirection: 'row'}}>  
             <View style={styles.leftitem}>
-              <Text>{this.state.homeTeam}</Text>
+              <Text>{this.props.dataSource[0].HomeTeam}</Text>
                <FlatList
                 scrollEnabled={false}
-                data={this.state.homeDataSource}
+                data={this.props.dataSource[0].HomeLineUp}
                 renderItem={this._renderStartLineup}
                 keyExtractor={(item, index) => index.toString()}
               />
               <Divider style={{ backgroundColor: 'blue' }} />
               <FlatList
               scrollEnabled={false}
-                data={this.state.homeDataSource}
+                data={this.props.dataSource[0].HomeLineUp}
                 renderItem={this._renderSubs}
                 keyExtractor={(item, index) => index.toString()}
               />
             </View>
             <View style={styles.rightitem}>
-            <Text>{this.state.awayTeam}</Text>
+            <Text>{this.props.dataSource[0].AwayTeam}</Text>
                <FlatList
                scrollEnabled={false}
-                data={this.state.awayDataSource}
+                data={this.props.dataSource[0].AwayLineUp}
                 renderItem={this._renderStartLineup}
                 keyExtractor={(item, index) => index.toString()}
               />
               <Divider style={{ backgroundColor: 'blue' }} />
               <FlatList
               scrollEnabled={false}
-                data={this.state.awayDataSource}
+                data={this.props.dataSource[0].AwayLineUp}
                 renderItem={this._renderSubs}
                 keyExtractor={(item, index) => index.toString()}
               />

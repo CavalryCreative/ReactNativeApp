@@ -23,7 +23,7 @@ export default class Main extends Component<Props> {
 componentDidMount() {
 
   this.loadFeed();
-  this.timer = setInterval(()=> this.loadFeed(), 60000);
+  this.timer = setInterval(()=> this.loadFeed(), 20000);
   }
 
    constructor(props){
@@ -79,7 +79,7 @@ componentDidMount() {
           <ActivityIndicator/>
         </View>
       )
-    }
+    }  
 
     return (   
          <RSwiper dataSource = {this.state.dataSource} teamId = {this.state.teamId} />

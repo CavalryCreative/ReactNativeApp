@@ -5,89 +5,54 @@ export default class Comment extends React.Component {
 
   constructor(props){
     super(props);
-
-    this.state ={ 
-        HomeComment: '',
-        HomeTeamId: '',
-        AwayComment: '',
-        AwayTeamId: '',
-        Minute: '',
-        Score: ''
-    };
-  }
-
-loadData(){
-  
-  let response = this.props.dataSource;
-
-  if (!Array.isArray(response) || !response.length)
-  {
-    this.setState({
-          
-           HomeComment: 'No game today',
-           AwayComment: 'No game today',
-           Minute: '',
-           Score: '',
-        }, function(){         
-        });
-  }
-  else
-  {
-    if(response[0].LatestEvent !== null)
-    {
-        this.setState({
-          
-           HomeComment: response[0].LatestEvent.HomeComment,
-           HomeTeamId: response[0].LatestEvent.HomeTeamAPIId,
-           AwayComment: response[0].LatestEvent.AwayComment,
-           AwayTeamId: response[0].LatestEvent.AwayTeamAPIId,
-           Minute: response[0].LatestEvent.Minute,
-           Score: response[0].LatestEvent.Score
-        }, function(){         
-        });
-    }
-    else
-    {
-      this.setState({
-          
-           HomeComment: 'Something cocked up',
-           AwayComment: 'Something cocked up',
-           Minute: '',
-           Score: '',
-        }, function(){         
-        });
-    }
-  }   
-}
-
- componentDidMount() {
-  this.loadData();
   }
 
   render(){
 
-let homeTeamId = this.state.HomeTeamId.toString();
-let selectedTeamId = this.props.teamId.toString();
+    let homeTeamId = this.props.dataSource === undefined ? 'undefined' : this.props.dataSource[0].LatestEvent.HomeTeamAPIId.toString();
+    let selectedTeamId = this.props.teamId.toString();
 
-    if(homeTeamId === selectedTeamId)
-    {
-       return (
+      if (!Array.isArray(this.props.dataSource) || !this.props.dataSource.length)
+      {
+        return(
             <View>
-              <Text>{this.state.Minute}</Text>
-              <Text>{this.state.HomeComment}</Text>
-              <Text>{this.state.Score}</Text>
+              <Text>No game today</Text>
             </View>
-          );
-    }
-    else
-    {
-        return (
-            <View>
-              <Text>{this.state.Minute}</Text>
-              <Text>{this.state.AwayComment}</Text>
-              <Text>{this.state.Score}</Text>
-            </View>
-          );
-    }
+        )
+      }
+      else
+      {
+          if(this.props.dataSource[0].LatestEvent !== null)
+          {
+              if(homeTeamId === selectedTeamId)
+              {
+                 return (
+                      <View>
+                        <Text>{this.props.dataSource[0].LatestEvent.Minute}</Text>
+                        <Text>{this.props.dataSource[0].LatestEvent.HomeComment}</Text>
+                        <Text>{this.props.dataSource[0].LatestEvent.Score}</Text>
+                      </View>
+                    );
+              }
+              else
+              {
+                  return (
+                      <View>
+                        <Text>{this.props.dataSource[0].LatestEvent.Minute}</Text>
+                        <Text>{this.props.dataSource[0].LatestEvent.AwayComment}</Text>
+                        <Text>{this.props.dataSource[0].LatestEvent.Score}</Text>
+                      </View>
+                    );
+              }
+          }
+          else
+          {
+              return(
+                  <View>
+                    <Text>Something cocked up</Text>
+                  </View>
+              )
+          }
+      }
   }
 }
