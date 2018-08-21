@@ -51,18 +51,18 @@ loadFeed(){
     const item = data.item;
     const selectedTeamId = this.props.team;
 
-    if(item.APIId.toString() === selectedTeamId.toString())
-    {
-        return ( 
-          <View style={{flex: 1}}> 
-            <View>
-              <Text>{item.Name} Selected</Text>
-            </View>          
-          </View>
-        );
-    }
-    else
-    {
+    // if(item.APIId.toString() === selectedTeamId.toString())
+    // {
+    //     return ( 
+    //       <View style={{flex: 1}}> 
+    //         <View>
+    //           <Text>{item.Name} Selected</Text>
+    //         </View>          
+    //       </View>
+    //     );
+    // }
+    // else
+    // {
          return ( 
           <View style={{flex: 1}}> 
             <View>              
@@ -74,7 +74,7 @@ loadFeed(){
             </View>          
           </View>
         );
-    }  
+    //}  
   };
 
    _getItemLayout = (data, index) => {
