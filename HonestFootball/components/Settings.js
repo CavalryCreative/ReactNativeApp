@@ -1,7 +1,9 @@
 import React, { PropTypes} from 'react';
 import { StyleSheet, FlatList, TouchableOpacity, Text, View, Dimensions, AsyncStorage  } from 'react-native';
 
-import { setTeamId, getTeamId } from '../storageManager'
+import { setTeamId } from '../storageManager'
+import { connect } from "react-redux";
+import { fetchTeams } from "../actions";
 
 // screen sizing
 const { width, height } = Dimensions.get('window');
@@ -12,44 +14,30 @@ const isSmallDevice = SCREEN_WIDTH <= 414;
 const numColumns = 2;
 //const numColumns = isSmallDevice ? 2 : 3;
 
-export default class Settings extends React.Component {
+class Settings extends React.Component {
 
-  constructor(props){
-    super(props);
-
-    this.state ={ 
-      
-    };
-  }
+  // constructor(props){
+  //   super(props);
+  // }
 
   componentDidMount() {
-    this.loadFeed();
+    this.props.dispatch(fetchTeams());
   }
-
-loadFeed(){
-  
-  const somePromise = new Promise(r => fetch('http://honest-apps.eu-west-1.elasticbeanstalk.com/api/teams'));
-  const cancelable = makeCancelable(somePromise); 
-
-  return fetch('http://honest-apps.eu-west-1.elasticbeanstalk.com/api/teams')//cancelable.promise
-      .then((response) => response.json())
-      .then((responseJson) => {
-
-        this.setState({
-          dataSource: responseJson.Teams,
-        }, function(){
-          
-        });
-      })
-     .catch(({isCanceled, ...error}) => console.log('isCanceled', isCanceled));
-
-     // Cancel promise
-      cancelable.cancel();
-}
 
  _renderItem = data => {
     const item = data.item;
+    const { error, loading } = this.props;
     const selectedTeamId = this.props.team;
+
+    if (error) {
+      return(
+          <View style={{flex: 1}}> 
+            <View>
+              <Text>Error! {error.message}</Text>
+            </View>          
+          </View>
+        )      
+    }
 
     if(item.APIId.toString() === selectedTeamId.toString())
     {
@@ -77,24 +65,17 @@ loadFeed(){
     }  
   };
 
-   _getItemLayout = (data, index) => {
-    
-    };
-
   render(){
 
      return (
         <View style={styles.container}>
            <FlatList
             scrollEnabled={false}
-            data={this.state.dataSource}
+            data={this.props.teams}
             keyExtractor={(item, index) => index.toString()}
             renderItem={this._renderItem}
           />       
         </View>
-
-         // <TextInput
-          //   onChangeText={this.props.onTeamUpdate} />
       );
   }
 }
@@ -109,28 +90,20 @@ function goPressHandler(team){//navHandler
   //   })
 }
 
-const makeCancelable = (promise) => {
-  let hasCanceled_ = false;
+const mapStateToProps = (state, props) => (
+  {
+    team: state.team,
+    navHandler: props.navHandler,
+    teams: state.teams.items,
+    loading: state.teams.loading,
+    error: state.teams.error
+  }
+)
 
-  const wrappedPromise = new Promise((resolve, reject) => {
-    promise.then(
-      val => hasCanceled_ ? reject({isCanceled: true}) : resolve(val),
-      error => hasCanceled_ ? reject({isCanceled: true}) : reject(error)
-    );
-  });
+export default connect(
+  mapStateToProps
+)(Settings)
 
-  return {
-    promise: wrappedPromise,
-    cancel() {
-      hasCanceled_ = true;
-    },
-  };
-};
-
-// Settings.propTypes = {
-//   team: PropTypes.string,
-//   onTeamUpdate: PropTypes.func.isRequired,
-// }
 
 const styles = StyleSheet.create({
   container: {
