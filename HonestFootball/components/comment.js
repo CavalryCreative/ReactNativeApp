@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, View, StyleSheet, ListView  } from 'react-native';
+import { globalStyle } from 'HonestFootball/components/app.style.js';
 
 export default class Comment extends React.Component {
 
@@ -28,7 +29,7 @@ export default class Comment extends React.Component {
               {
                  return (
                  
-                      <View style={{flex: 1}}>
+                      <View style={styles.headerContainer}>
                        <View style={{flex: 1, backgroundColor: 'powderblue'}} >
                         <Text>{this.props.dataSource[0].LatestEvent.Minute}</Text>
                         </View>
@@ -43,20 +44,22 @@ export default class Comment extends React.Component {
               {
                   return (
 
-                      <View style={{flex:1, width:380}}>
+                      <View style={styles.pageComments}>
 
-                       <View style={{flex: 2, backgroundColor: 'white', marginTop:30}} >
-                          <View style={styles.timBox} >
-                          <Text style={styles.timeSml}>Time:</Text>
-                            <Text style={styles.time}>{this.props.dataSource[0].LatestEvent.Minute}</Text>
-                          </View>
-                          <View style={{width:150}} >
-                              <Text style={{color: 'white'}}>{this.props.dataSource[0].LatestEvent.Score}</Text>
-                                       </View>
+                       <View style={styles.pageCommentsHead} >
+                            <View style={styles.timBox} >
+                                    <Text style={styles.label}>Time:</Text>
+                                    <Text style={styles.time}>{this.props.dataSource[0].LatestEvent.Minute}</Text>
+                            </View>
+                            <View style={styles.scoreBox} >
+                             <Text style={styles.label}>Scoreline:</Text>
+                                    <Text style={styles.scoreTeam}>{this.props.dataSource[0].LatestEvent.Score}</Text>
+                                   
+                            </View>
 
- </View>
+                        </View>
                          <View style={{flex: 10, backgroundColor: '#b4281e', color: 'white'}} >
-                        <Text style={styles.lrgComment}>{this.props.dataSource[0].LatestEvent.AwayComment}</Text>
+                            <Text style={styles.lrgComment}>{this.props.dataSource[0].LatestEvent.AwayComment}</Text>
                       
                         </View>
                       </View>
@@ -91,6 +94,20 @@ const styles = StyleSheet.create({
 
 
   },
+  pageComments:{
+    flex:1,
+    
+    
+    width:380,
+  },
+  pageCommentsHead:{
+    flex: 2, 
+    flexDirection: 'row',
+    backgroundColor: 'white', 
+    marginTop:30,
+    marginBottom:0,
+  },
+
   //    timeBlock: {
   //  border:'1px'
    
@@ -100,7 +117,7 @@ const styles = StyleSheet.create({
    time: {
     color: '#b4281e',
     fontWeight: 'bold',
-    fontSize: 50,
+    fontSize: 55,
   
     textAlign: "left",
   
@@ -109,24 +126,27 @@ const styles = StyleSheet.create({
    paddingLeft:15,
    paddingTop:-5,
    paddingBottom:0,
-
-  
-   
-
+  },
+  scoreTeam:{
 
   },
    timBox: {
-    width:170,
+    flex:1,
     borderRightWidth:1,
     borderColor:'#b4281e',
     marginBottom:0,
-   
-    
-   
-
-
+    paddingBottom:0,
   },
-  timeSml: {
+ 
+ scoreBox:{
+
+  flex:2,
+   borderRightWidth:1,
+    borderColor:'#b4281e',
+    marginBottom:0,
+    paddingBottom:0,
+  },
+  label: {
     color: '#212e51',
     fontWeight: 'bold',
     fontSize: 15,
@@ -135,11 +155,17 @@ const styles = StyleSheet.create({
      paddingTop:0,
      marginBottom:0,
      paddingBottom:0,
-    
-   
-
 
   },
+  scoreTeam:{
+     color: '#212e51',
+    fontWeight: 'bold',
+    fontSize: 22,
+    paddingLeft:15,
+    paddingTop:6,
+  },
+
+
   scoreLine: {
     color: '#212e51',
     fontWeight: 'bold',
