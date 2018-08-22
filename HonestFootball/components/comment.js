@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, View, StyleSheet, ListView  } from 'react-native';
 import { globalStyle } from 'HonestFootball/components/app.style.js';
+import { teamColors } from 'HonestFootball/components/colors.style.js';
 
 export default class Comment extends React.Component {
 
@@ -115,7 +116,7 @@ const styles = StyleSheet.create({
 
   // },
    time: {
-    color: '#b4281e',
+    color: teamColors.primary,
     fontWeight: 'bold',
     fontSize: 55,
   
@@ -133,7 +134,7 @@ const styles = StyleSheet.create({
    timBox: {
     flex:1,
     borderRightWidth:1,
-    borderColor:'#b4281e',
+    borderColor:teamColors.secondary,
     marginBottom:0,
     paddingBottom:0,
   },
@@ -142,12 +143,12 @@ const styles = StyleSheet.create({
 
   flex:2,
    borderRightWidth:1,
-    borderColor:'#b4281e',
+    borderColor:teamColors.secondary,
     marginBottom:0,
     paddingBottom:0,
   },
   label: {
-    color: '#212e51',
+    color: teamColors.secondary,
     fontWeight: 'bold',
     fontSize: 15,
     marginTop:0,
@@ -158,7 +159,7 @@ const styles = StyleSheet.create({
 
   },
   scoreTeam:{
-     color: '#212e51',
+     color: teamColors.primary,
     fontWeight: 'bold',
     fontSize: 22,
     paddingLeft:15,
@@ -167,7 +168,7 @@ const styles = StyleSheet.create({
 
 
   scoreLine: {
-    color: '#212e51',
+    color: teamColors.primary,
     fontWeight: 'bold',
     fontSize: 15,
     marginTop:0,
