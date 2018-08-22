@@ -7,9 +7,9 @@ const mapStateToProps = (state, props) => (
 	{
 		team: state.team,
 		navHandler: props.navHandler,
-		teams: state.teams.items,
-		loading: state.teams.loading,
-		error: state.teams.error
+		teams: state.fetchTeamsReducer.items,
+		loading: state.fetchTeamsReducer.loading,
+		error: state.fetchTeamsReducer.error
 	}
 )
 

@@ -2,7 +2,8 @@ import React, { PropTypes} from 'react';
 import { StyleSheet, FlatList, TouchableOpacity, Text, View, Dimensions, AsyncStorage  } from 'react-native';
 
 import { setTeamId } from '../storageManager'
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
+import { fetchTeams } from '../actions';
 
 // screen sizing
 const { width, height } = Dimensions.get('window');
@@ -22,7 +23,7 @@ export default class Settings extends React.Component<Props> {
 
   componentDidMount() {
     console.log('Settings componentDidMount: ')
-    this.props.onTeamFetch();
+    dispatch(this.props.onTeamFetch());
   }
 
  _renderItem = data => {

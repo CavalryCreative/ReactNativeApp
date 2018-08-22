@@ -7,6 +7,7 @@ import AppContainer from './containers/AppContainer'
 import honestFootballReducers from './reducers'
 
 let store = createStore(honestFootballReducers)
+console.log(store.getState());
 
 class HonestFootball extends Component {
 	render() {
