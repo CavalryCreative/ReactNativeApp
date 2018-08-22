@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native';
 
 import {routes} from '../routes'
 import Main from './Main';
-import Settings from './Settings'
+import SettingsContainer from '../containers/SettingsContainer'
 import RSwiper from './MultiSwiper'
 
 import { getTeamId } from '../storageManager'
@@ -45,7 +45,7 @@ componentDidMount() {
         }
         else
         {
-          return <Settings teamId={this.state.teamId} />
+          return <SettingsContainer teamId={this.state.teamId} />
         }
   }
 }

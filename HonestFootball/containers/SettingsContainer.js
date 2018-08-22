@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 
-import {updateTeam, fetchTeams} from '../actions'
+import {fetchTeamsBegin, fetchTeamsSuccess, fetchTeamsError, updateTeam, fetchTeams} from '../actions'
 import Settings from '../components/Settings'
 
 const mapStateToProps = (state, props) => (

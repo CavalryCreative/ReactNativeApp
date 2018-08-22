@@ -3,7 +3,7 @@ import {combineReducers} from 'redux'
 import {
   FETCH_TEAMS_BEGIN,
   FETCH_TEAMS_SUCCESS,
-  FETCH_TEAMS_FAILURE
+  FETCH_TEAMS_ERROR
 } from '../actions';
 
 const initialState = {
@@ -13,6 +13,7 @@ const initialState = {
 };
 
 function fetchTeamsReducer(state = initialState, action) {
+
   switch(action.type) {
     case FETCH_TEAMS_BEGIN:
       // Mark the state as "loading" so we can show a spinner or something
@@ -32,7 +33,7 @@ function fetchTeamsReducer(state = initialState, action) {
         items: action.payload.teams
       };
 
-    case FETCH_TEAMS_FAILURE:
+    case FETCH_TEAMS_ERROR:
       // The request failed, but it did stop, so set loading to "false".
       // Save the error, and we can display it somewhere
       // Since it failed, we don't have items to display anymore, so set it empty.

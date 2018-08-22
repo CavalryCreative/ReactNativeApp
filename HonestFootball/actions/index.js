@@ -1,6 +1,6 @@
 export const FETCH_TEAMS_BEGIN   = 'FETCH_TEAMS_BEGIN';
 export const FETCH_TEAMS_SUCCESS = 'FETCH_TEAMS_SUCCESS';
-export const FETCH_TEAMS_FAILURE = 'FETCH_TEAMS_FAILURE';
+export const FETCH_TEAMS_ERROR = 'FETCH_TEAMS_ERROR';
 
 export function updateTeam(team){
 	
@@ -27,12 +27,14 @@ export const fetchTeamsSuccess = teams => ({
 });
 
 export const fetchTeamsError = error => ({
-  type: FETCH_TEAMS_FAILURE,
+  type: FETCH_TEAMS_ERROR,
   payload: { error }
 });
 
 export function fetchTeams() {
+  
   return dispatch => {
+
     dispatch(fetchTeamsBegin());
 
     return fetch("http://honest-apps.eu-west-1.elasticbeanstalk.com/api/teams")
@@ -41,10 +43,10 @@ export function fetchTeams() {
       .then(json => {
         dispatch(fetchTeamsSuccess(json.Teams));
 
-        console.log('Action index: ', json)
         return json.Teams;
       })
-      .catch(error => dispatch(fetchTeamsFailure(error)));
+      .catch(
+        error => dispatch(fetchTeamsError(error)));
   };
 }
 

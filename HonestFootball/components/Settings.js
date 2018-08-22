@@ -3,7 +3,6 @@ import { StyleSheet, FlatList, TouchableOpacity, Text, View, Dimensions, AsyncSt
 
 import { setTeamId } from '../storageManager'
 import { connect } from "react-redux";
-import { fetchTeams } from "../actions";
 
 // screen sizing
 const { width, height } = Dimensions.get('window');
@@ -14,14 +13,16 @@ const isSmallDevice = SCREEN_WIDTH <= 414;
 const numColumns = 2;
 //const numColumns = isSmallDevice ? 2 : 3;
 
-class Settings extends React.Component {
+type Props = {};
+export default class Settings extends React.Component<Props> {
 
-  // constructor(props){
-  //   super(props);
-  // }
+  constructor(props){
+    super(props);
+  }
 
   componentDidMount() {
-    this.props.dispatch(fetchTeams());
+    console.log('Settings componentDidMount: ')
+    this.props.onTeamFetch();
   }
 
  _renderItem = data => {
@@ -89,21 +90,6 @@ function goPressHandler(team){//navHandler
   //     navHandler()
   //   })
 }
-
-const mapStateToProps = (state, props) => (
-  {
-    team: state.team,
-    navHandler: props.navHandler,
-    teams: state.teams.items,
-    loading: state.teams.loading,
-    error: state.teams.error
-  }
-)
-
-export default connect(
-  mapStateToProps
-)(Settings)
-
 
 const styles = StyleSheet.create({
   container: {
