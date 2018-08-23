@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
 
-import {routes} from '../routes'
+import AppNavigator from '../navigation'
 import Main from './Main';
 import SettingsContainer from '../containers/SettingsContainer'
 import RSwiper from './MultiSwiper'
@@ -41,11 +41,17 @@ componentDidMount() {
 
         if (this.state.teamId)
         {
-          return <Main teamId = {this.state.teamId} />
+          return(
+               <AppNavigator />
+                <Main teamId = {this.state.teamId} />
+            )
         }
         else
         {
-          return <SettingsContainer teamId={this.state.teamId} />
+          return(
+                <AppNavigator />
+                <SettingsContainer teamId={this.state.teamId} navHandler={() => } />
+            ) 
         }
   }
 }

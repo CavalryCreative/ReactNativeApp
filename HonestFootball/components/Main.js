@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 
 import RSwiper from './MultiSwiper'
-import routes from '../routes'
+import AppNavigator from '../navigation'
 import { getTeamId } from '../storageManager'
 
 type Props = {};

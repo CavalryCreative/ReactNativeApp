@@ -5,6 +5,9 @@ import { setTeamId } from '../storageManager'
 import { connect } from 'react-redux';
 import { fetchTeams } from '../actions';
 
+//import AppNavigator from '../navigation'
+import { createStackNavigator } from 'react-navigation';
+
 // screen sizing
 const { width, height } = Dimensions.get('window');
 // orientation must fixed
@@ -19,6 +22,10 @@ export default class Settings extends React.Component<Props> {
 
   constructor(props){
     super(props);
+  }
+
+  componentWillReceiveProps(nextProps){
+    console.log('Settings componentWillReceiveProps:', nextProps);
   }
 
   componentDidMount() {
@@ -56,7 +63,7 @@ export default class Settings extends React.Component<Props> {
           <View style={{flex: 1}}> 
             <View>              
               <TouchableOpacity
-                onPress={() => { goPressHandler(item.APIId) }} //goPressHandler(this.props.navHandler, item.Name) }
+                onPress={() => { goPressHandler(item.APIId, props.navHandler) }} //goPressHandler(this.props.navHandler, item.Name) }
                 >
                 <Text>{item.Name}</Text>
               </TouchableOpacity>
@@ -81,9 +88,11 @@ export default class Settings extends React.Component<Props> {
   }
 }
 
-function goPressHandler(team){//navHandler
-  //console.log('Settings: ', team.toString())
+function goPressHandler(team, navHandler){//navHandler
+  console.log('Settings: ', navHandler)
   setTeamId(team.toString());
+
+  //nav.navigate('App');
   // .then(() => navHandler())
   //   .catch(ex => {
   //     console.log('Error storing customer name and account, proceeding anyway. Details:', ex)
