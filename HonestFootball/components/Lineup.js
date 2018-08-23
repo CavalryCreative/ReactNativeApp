@@ -158,7 +158,7 @@ export default class Lineup extends React.Component {
 
   render(){
 
-  if (this.props.dataSource[0].HomeTeam === '')
+  if (!Array.isArray(this.props.dataSource) || !this.props.dataSource.length)
   {
     return(
          <View style={{flex: 1}}>  

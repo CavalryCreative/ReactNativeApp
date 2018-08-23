@@ -42,15 +42,16 @@ componentDidMount() {
         if (this.state.teamId)
         {
           return(
-               <AppNavigator />
+               //<AppNavigator />
                 <Main teamId = {this.state.teamId} />
             )
         }
         else
         {
           return(
-                <AppNavigator />
-                <SettingsContainer teamId={this.state.teamId} navHandler={() => } />
+                //<AppNavigator />
+                //<SettingsContainer teamId={this.state.teamId} navHandler={() => } />
+                <SettingsContainer teamId={this.state.teamId} />
             ) 
         }
   }

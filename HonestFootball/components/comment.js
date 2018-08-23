@@ -9,9 +9,6 @@ export default class Comment extends React.Component {
 
   render(){
 
-    let homeTeamId = this.props.dataSource === undefined ? 'undefined' : this.props.dataSource[0].LatestEvent.HomeTeamAPIId.toString();
-    let selectedTeamId = this.props.teamId.toString();
-
       if (!Array.isArray(this.props.dataSource) || !this.props.dataSource.length)
       {
         return(
@@ -24,6 +21,9 @@ export default class Comment extends React.Component {
       {
           if(this.props.dataSource[0].LatestEvent !== null)
           {
+              let homeTeamId = this.props.dataSource === undefined ? 'undefined' : this.props.dataSource[0].LatestEvent.HomeTeamAPIId.toString();
+              let selectedTeamId = this.props.teamId.toString();
+
               if(homeTeamId === selectedTeamId)
               {
                  return (
