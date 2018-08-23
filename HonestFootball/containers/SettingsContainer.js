@@ -17,11 +17,9 @@ const mapDispatchToProps = (dispatch) => (
 	{		
 		onTeamUpdate: (value) => {
 			dispatch(updateTeam(value))
-			//console.log('onTeamUpdate: ', value)
 		},
 		onTeamFetch: () => {
 			dispatch(fetchTeams())
-			console.log('onTeamFetch: ')
 		},
 	}
 )

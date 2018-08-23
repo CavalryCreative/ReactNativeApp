@@ -26,7 +26,7 @@ export default class RSwiper extends React.Component {
         index={1}>
         
         <View style={styles.slide2}>
-          <Settings />
+          <SettingsContainer />
         </View>
 
           <Swiper

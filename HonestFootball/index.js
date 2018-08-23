@@ -1,13 +1,15 @@
 import React, {Component} from 'react'
 import { AppRegistry } from 'react-native'
 import { Provider} from 'react-redux'
-import { createStore } from 'redux'
+import { createStore, applyMiddleware  } from 'redux'
 
 import AppContainer from './containers/AppContainer'
 import honestFootballReducers from './reducers'
 
-let store = createStore(honestFootballReducers)
-console.log(store.getState());
+import thunk from 'redux-thunk';
+
+let store = createStore(honestFootballReducers, applyMiddleware(thunk))
+//console.log(store.getState());
 
 class HonestFootball extends Component {
 	render() {

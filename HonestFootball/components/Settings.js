@@ -22,8 +22,7 @@ export default class Settings extends React.Component<Props> {
   }
 
   componentDidMount() {
-    console.log('Settings componentDidMount: ')
-    dispatch(this.props.onTeamFetch());
+    this.props.onTeamFetch();
   }
 
  _renderItem = data => {
