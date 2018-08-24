@@ -89,7 +89,7 @@ export default class Settings extends React.Component<Props> {
 }
 
 function goPressHandler(team, navHandler){//navHandler
-  console.log('Settings: ', navHandler)
+  
   setTeamId(team.toString());
 
   //nav.navigate('App');

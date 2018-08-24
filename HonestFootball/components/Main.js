@@ -41,12 +41,17 @@ componentDidMount() {
     };
   }
 
+componentWillReceiveProps(nextProps){
+    console.log('Main componentWillReceiveProps:', nextProps);
+  }
+
   componentWillUnmount(){
     clearInterval(this.timer);
   }
 
   loadFeed(){
 
+console.log('Main: ', this.props)
   let teamId = this.props.teamId;
 
   return fetch('http://honest-apps.eu-west-1.elasticbeanstalk.com/api/feed/' + teamId)
