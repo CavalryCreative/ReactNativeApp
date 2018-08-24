@@ -6,7 +6,6 @@ import Settings from '../components/Settings'
 const mapStateToProps = (state, props) => (
 	{
 		team: state.team,
-		navHandler: props.navHandler,
 		teams: state.fetchTeamsReducer.items,
 		loading: state.fetchTeamsReducer.loading,
 		error: state.fetchTeamsReducer.error

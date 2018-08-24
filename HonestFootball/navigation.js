@@ -5,31 +5,31 @@ import SettingsContainer from './containers/SettingsContainer'
 
 const SettingsStack = createStackNavigator({
 
- 	Settings: {
- 		screen:'SettingsContainer',
- 		navigationOptions: {
+ 	SettingsContainer: {
+ 		screen: SettingsContainer,
+ 		navigationOptions: ({navigation}) =>{
  			headerTitle: 'Pick a team'
  		}
  	}
  }
-)
+);
 
-const AppStack = createStackNavigator({
+const MainStack = createStackNavigator({
 
  	Main: {
- 		screen:'Main',
- 		navigationOptions: {
+ 		screen: Main,
+ 		navigationOptions: ({navigation}) => {
  			headerTitle: 'Honest Football'
  		}
  	}
  }
-)
+);
 
 export default createSwitchNavigator(
 {
-	App: AppStack,
-	Settings: SettingsStack
+	Main: MainStack,
+	SettingsContainer: SettingsStack
 },
 {
-	initialRouteName: 'App'
+	initialRouteName: 'Main'
 });
