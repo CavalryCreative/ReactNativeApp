@@ -63,7 +63,7 @@ export default class Settings extends React.Component<Props> {
           <View style={{flex: 1}}> 
             <View>              
               <TouchableOpacity
-                onPress={() => { goPressHandler(item.APIId, props.navHandler) }} //goPressHandler(this.props.navHandler, item.Name) }
+                onPress={() => { goPressHandler(item.APIId, this.props.navHandler) }} //goPressHandler(this.props.navHandler, item.Name) }
                 >
                 <Text>{item.Name}</Text>
               </TouchableOpacity>
