@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 
-import {fetchTeamsBegin, fetchTeamsSuccess, fetchTeamsError, updateTeam, fetchTeams} from '../actions'
+import {fetchTeamsBegin, fetchTeamsSuccess, fetchTeamsError, updateTeam, fetchTeams, rehydrateTeamName} from '../actions'
 import Settings from '../components/Settings'
 
 const mapStateToProps = (state, props) => (
@@ -20,6 +20,9 @@ const mapDispatchToProps = (dispatch) => (
 		onTeamFetch: () => {
 			dispatch(fetchTeams())
 		},
+		onRehydrateTeamName: (name) => {
+			dispatch(rehydrateTeamName(name))
+		}
 	}
 )
 

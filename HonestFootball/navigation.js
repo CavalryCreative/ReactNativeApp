@@ -1,6 +1,6 @@
 import React from 'react'
 import { createStackNavigator, createSwitchNavigator } from 'react-navigation'
-import Main from './components/Main';
+import MainContainer from './containers/MainContainer';
 import SettingsContainer from './containers/SettingsContainer' 
 
 const SettingsStack = createStackNavigator({
@@ -16,8 +16,8 @@ const SettingsStack = createStackNavigator({
 
 const MainStack = createStackNavigator({
 
- 	Main: {
- 		screen: Main,
+ 	MainContainer: {
+ 		screen: MainContainer,
  		navigationOptions: ({navigation}) => {
  			headerTitle: 'Honest Football'
  		}
@@ -27,9 +27,9 @@ const MainStack = createStackNavigator({
 
 export default createSwitchNavigator(
 {
-	Main: MainStack,
+	MainContainer: MainStack,
 	SettingsContainer: SettingsStack
 },
 {
-	initialRouteName: 'Main'
+	initialRouteName: 'SettingsContainer'
 });

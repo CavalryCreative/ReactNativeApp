@@ -1,7 +1,7 @@
 import React, { PropTypes} from 'react';
 import { StyleSheet, FlatList, TouchableOpacity, Text, View, Dimensions, AsyncStorage  } from 'react-native';
 
-import { setTeamId } from '../storageManager'
+import { setTeamId, getTeamId } from '../storageManager'
 import { connect } from 'react-redux';
 import { fetchTeams } from '../actions';
 
@@ -25,17 +25,18 @@ export default class Settings extends React.Component<Props> {
   }
 
   componentWillReceiveProps(nextProps){
-    console.log('Settings componentWillReceiveProps:', nextProps);
+    
   }
 
   componentDidMount() {
+    console.log('Settings componentDidMount:', this.props);
     this.props.onTeamFetch();
   }
 
  _renderItem = data => {
     const item = data.item;
     const { error, loading } = this.props;
-    const selectedTeamId = this.props.team;
+    //const selectedTeamId = this.props.team;
 
     if (error) {
       return(
@@ -47,7 +48,8 @@ export default class Settings extends React.Component<Props> {
         )      
     }
 
-    if(item.APIId.toString() === selectedTeamId.toString())
+//console.log('Settings _renderItem: ', item.APIId, this.props.team)
+    if(item.APIId.toString() === this.props.team.toString())
     {
         return ( 
           <View style={{flex: 1}}> 
@@ -63,7 +65,7 @@ export default class Settings extends React.Component<Props> {
           <View style={{flex: 1}}> 
             <View>              
               <TouchableOpacity
-                onPress={() => { goPressHandler(item.APIId, this.props.navHandler) }} //goPressHandler(this.props.navHandler, item.Name) }
+                onPress={() => { goPressHandler(item.APIId, this.props) }} //goPressHandler(this.props.navHandler, item.Name) }
                 >
                 <Text>{item.Name}</Text>
               </TouchableOpacity>
@@ -88,10 +90,21 @@ export default class Settings extends React.Component<Props> {
   }
 }
 
-function goPressHandler(team, navHandler){//navHandler
-  
+function goPressHandler(team, props){//navHandler
+
   setTeamId(team.toString());
 
+  getTeamId().
+      then(data =>{
+       
+       console.log('Settings goPressHandler:', data.team, props)
+        if(data.team)
+        {
+           props.onRehydrateTeamName(data.team);
+        } 
+      })
+
+  props.navigation.navigate('MainContainer');
   //nav.navigate('App');
   // .then(() => navHandler())
   //   .catch(ex => {

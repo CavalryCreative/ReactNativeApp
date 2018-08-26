@@ -6,38 +6,35 @@ import Lineup  from './Lineup'
 import LeagueTable  from './Table'
 import Fixtures  from './Fixtures'
 
-const LineupRoute = (props) => {
-  //<View style={[styles.container, { backgroundColor: '#ff4081' }]} />
-  const response = props.dataSource;
-  const teamId = props.teamId;
+// const LineupRoute = (props) => {
+//   //<View style={[styles.container, { backgroundColor: '#ff4081' }]} />
+//   const response = props.dataSource;
+//   const teamId = props.team;
 
-  if (response !== undefined)
-  {
-    return <Lineup dataSource={response} teamId={teamId} />
-  }
-  else
-  {
-    return <Text>Twat</Text>
-  }
-};
+//   if (response !== undefined)
+//   {
+//     return <Lineup dataSource={response} teamId={teamId} />
+//   }
+//   else
+//   {
+//     return <Text>Twat</Text>
+//   }
+// };
 
-const TableRoute = () => (
-  //<View style={[styles.container, { backgroundColor: '#673ab7' }]} />
-  <LeagueTable />
-);
+// const TableRoute = () => (
+//   //<View style={[styles.container, { backgroundColor: '#673ab7' }]} />
+//   <LeagueTable />
+// );
 
-const FixtureRoute = () => (
-  <Fixtures />
-  //<View style={[styles.container, { backgroundColor: '#373ab7' }]} />
-);
+// const FixtureRoute = () => (
+//   <Fixtures />
+//   //<View style={[styles.container, { backgroundColor: '#373ab7' }]} />
+// );
 
 export default class LineupsTabView extends React.Component {
 
    constructor(props){
     super(props);
-
-let response = this.props.dataSource;
-let teamId = this.props.teamId;
 
      this.state = {
       index: 0,
@@ -45,20 +42,18 @@ let teamId = this.props.teamId;
         { key: 'lineup', title: 'lineup' },
         { key: 'table', title: 'table' },
         { key: 'fixtures', title: 'fixtures' },
-      ],
-      dataSource: response,
-      teamId: teamId
+      ]
     };
   }
 
 renderScene = ({ route }) => {
    switch (route.key) {
      case 'lineup':
-       return <Lineup dataSource={this.state.dataSource} teamId={this.state.teamId} />;
+       return <Lineup dataSource={this.props.dataSource} />;
      case 'table':
        return <LeagueTable />;
       case 'fixtures':
-       return <Fixtures teamId={this.state.teamId} />;
+       return <Fixtures teamId={this.props.teamId} />;
      default:
       return null;
   }

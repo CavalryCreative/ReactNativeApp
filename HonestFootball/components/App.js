@@ -24,6 +24,7 @@ componentDidMount() {
    getTeamId().
       then(data =>{
        
+       console.log('App componentDidMount:', data.team)
         if(data.team)
         {
            this.props.onRehydrateTeamName(data.team);
@@ -39,21 +40,25 @@ componentDidMount() {
 
   render() {
 
-        if (this.state.teamId)
-        {
-          return(
-               //<AppNavigator />
-                <Main teamId = {this.state.teamId} />
-            )
-        }
-        else
-        {
-          return(
-                //<AppNavigator />
-                //<SettingsContainer teamId={this.state.teamId} navHandler={() => } />
-                <SettingsContainer teamId={this.state.teamId} />
-            ) 
-        }
+return(
+  <AppNavigator />
+  )
+  
+        // if (this.state.teamId)
+        // {
+        //   return(
+        //        //<AppNavigator />
+        //         <Main teamId = {this.state.teamId} />
+        //     )
+        // }
+        // else
+        // {
+        //   return(
+        //         //<AppNavigator />
+        //         //<SettingsContainer teamId={this.state.teamId} navHandler={() => } />
+        //         <SettingsContainer teamId={this.state.teamId} />
+        //     ) 
+        // }
   }
 }
 
