@@ -59,7 +59,7 @@ export default class Comment extends React.Component {
                             </View>
 
                         </View>
-                         <View style={{flex: 10, backgroundColor: '#b4281e', color: 'white'}} >
+                         <View style={{flex: 10, backgroundColor: '#b4281e'}} >
                             <Text style={styles.lrgComment}>{this.props.dataSource[0].LatestEvent.AwayComment}</Text>
                       
                         </View>

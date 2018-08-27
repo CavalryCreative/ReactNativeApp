@@ -22,10 +22,7 @@ export default class Main extends Component<Props> {
 
 componentDidMount() {
 
-const itemId = this.props.navigation.getParam('teamId', '');
-console.log('Main componentDidMount: ', itemId);
-
-  this.loadFeed(itemId);
+  setTimeout(() => this.loadFeed());
   this.timer = setInterval(()=> this.loadFeed(''), 10000);
   }
 
@@ -48,20 +45,10 @@ console.log('Main componentDidMount: ', itemId);
     clearInterval(this.timer);
   }
 
-  loadFeed(id){
+  loadFeed(){
 
-  let teamId;
-
-  if(id === '')
-  {
-     teamId = this.props.team;
-  }
-  else
-  {
-      teamId = id; 
-  }
-
-  //console.log('Main loadFeed: ', teamId)
+  let teamId = this.props.team;
+  console.log('Main loadFeed: ', teamId)
 
   return fetch('http://honest-apps.eu-west-1.elasticbeanstalk.com/api/feed/' + teamId)
       .then((response) => response.json())

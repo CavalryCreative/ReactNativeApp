@@ -36,7 +36,6 @@ export default class Settings extends React.Component<Props> {
     const { error, loading } = this.props;
     //const selectedTeamId = this.props.team;
 
-<<<<<<< HEAD
     if (error) {
       return(
           <View style={{flex: 1}}> 
@@ -71,7 +70,7 @@ export default class Settings extends React.Component<Props> {
             </View>          
           </View>
         );
-    //}  
+    }  
   };
 
   render(){
@@ -101,19 +100,12 @@ let teamId;
         if(data.team)
         {
            props.onRehydrateTeamName(data.team);
-
-           //teamId = data.team;
         } 
       })
 
 console.log('Settings goPressHandler:', team.toString())
 
-   setTimeout(() => props.navigation.navigate('MainContainer',
-    {
-      teamId: team.toString(),
-    }
-    )
-   );
+   setTimeout(() => props.navigation.navigate('MainContainer'));
 }
 
 const styles = StyleSheet.create({
