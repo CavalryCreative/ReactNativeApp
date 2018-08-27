@@ -2,6 +2,8 @@ import * as React from 'react';
 import { View, StyleSheet, Dimensions, Text } from 'react-native';
 import { Alert, TabView, TabBar, SceneMap } from 'react-native-tab-view';
 
+import { teamColors } from 'HonestFootball/components/colors.style.js';
+
 import Lineup  from './Lineup'
 import LeagueTable  from './Table'
 import Fixtures  from './Fixtures'
@@ -67,22 +69,22 @@ renderScene = ({ route }) => {
         renderScene={this.renderScene}
         onIndexChange={index => this.setState({ index })}
         initialLayout={{ width: Dimensions.get('window').width, height: Dimensions.get('window').height}}
-        style={styles.container}
-        tabStyle={styles.tab}
+        style={{backgroundColor:'red'}}
+       renderTabBar={props =>
+  <TabBar
+    {...props}
+    indicatorStyle={{ backgroundColor: 'pink' }}/>
+}
+       
+         
       />
+
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    borderTopWidth: 1,
-    borderTopColor: '#fff',
-    height: 96
-  },
-  tab:{
-    backgroundColor: '#fff'
-  }
+  
+
+ 
 });

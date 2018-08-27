@@ -36,6 +36,7 @@ export default class Settings extends React.Component<Props> {
     const { error, loading } = this.props;
     //const selectedTeamId = this.props.team;
 
+<<<<<<< HEAD
     if (error) {
       return(
           <View style={{flex: 1}}> 
@@ -70,7 +71,7 @@ export default class Settings extends React.Component<Props> {
             </View>          
           </View>
         );
-    }  
+    //}  
   };
 
   render(){
