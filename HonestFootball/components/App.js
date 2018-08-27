@@ -21,7 +21,7 @@ export default class App extends Component<Props> {
 
 componentDidMount() {
 
-console.log('App componentDidMount:', this.props)
+//console.log('App componentDidMount:', this.props)
 
    getTeamId().
       then(data =>{
@@ -40,7 +40,7 @@ console.log('App componentDidMount:', this.props)
   }
 
   render() {
-console.log('App render:', this.props)
+//console.log('App render:', this.props)
 return(
   <AppNavigator />
   )

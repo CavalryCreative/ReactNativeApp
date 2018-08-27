@@ -26,16 +26,6 @@ export default class Settings extends React.Component<Props> {
     super(props);
   }
 
-  componentWillReceiveProps(nextProps){
-
-    // if(!_.isEmpty(nextProps.team))
-    // {
-    //   console.log('Settings componentWillReceiveProps:', nextProps);
-
-    //   this.props.navigation.navigate('MainScreen');
-    // }
-  }
-
   componentDidMount() {
     //console.log('Settings componentDidMount:', this.props);
     this.props.onTeamFetch();
@@ -102,23 +92,27 @@ function goPressHandler(team, props){//navHandler
 
   setTeamId(team.toString());
 
+let teamId;
+
   getTeamId().
       then(data =>{
        
-       console.log('Settings goPressHandler:', data.team, props)
         if(data.team)
         {
            props.onRehydrateTeamName(data.team);
+
+           //teamId = data.team;
         } 
       })
 
-  props.navigation.navigate('MainContainer');
-  //nav.navigate('App');
-  // .then(() => navHandler())
-  //   .catch(ex => {
-  //     console.log('Error storing customer name and account, proceeding anyway. Details:', ex)
-  //     navHandler()
-  //   })
+console.log('Settings goPressHandler:', team.toString())
+
+   setTimeout(() => props.navigation.navigate('MainContainer',
+    {
+      teamId: team.toString(),
+    }
+    )
+   );
 }
 
 const styles = StyleSheet.create({

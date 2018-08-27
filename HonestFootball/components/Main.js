@@ -22,9 +22,11 @@ export default class Main extends Component<Props> {
 
 componentDidMount() {
 
-//console.log('Main componentDidMount:', this.props);
-  this.loadFeed();
-  this.timer = setInterval(()=> this.loadFeed(), 20000);
+const itemId = this.props.navigation.getParam('teamId', '');
+console.log('Main componentDidMount: ', itemId);
+
+  this.loadFeed(itemId);
+  this.timer = setInterval(()=> this.loadFeed(''), 10000);
   }
 
    constructor(props){
@@ -42,18 +44,24 @@ componentDidMount() {
     };
   }
 
-componentWillReceiveProps(nextProps){
-  //console.log('Main componentWillReceiveProps:', this.props);
-  }
-
   componentWillUnmount(){
     clearInterval(this.timer);
   }
 
-  loadFeed(){
+  loadFeed(id){
 
-  let teamId = this.props.team;
-  //console.log('Main loadFeed: ', this.props)
+  let teamId;
+
+  if(id === '')
+  {
+     teamId = this.props.team;
+  }
+  else
+  {
+      teamId = id; 
+  }
+
+  //console.log('Main loadFeed: ', teamId)
 
   return fetch('http://honest-apps.eu-west-1.elasticbeanstalk.com/api/feed/' + teamId)
       .then((response) => response.json())
