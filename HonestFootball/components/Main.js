@@ -22,7 +22,7 @@ export default class Main extends Component<Props> {
 
 componentDidMount() {
 
-console.log('Main componentDidMount:', this.props);
+//console.log('Main componentDidMount:', this.props);
   this.loadFeed();
   this.timer = setInterval(()=> this.loadFeed(), 20000);
   }
@@ -43,7 +43,7 @@ console.log('Main componentDidMount:', this.props);
   }
 
 componentWillReceiveProps(nextProps){
-    
+  //console.log('Main componentWillReceiveProps:', this.props);
   }
 
   componentWillUnmount(){
@@ -53,7 +53,7 @@ componentWillReceiveProps(nextProps){
   loadFeed(){
 
   let teamId = this.props.team;
-  console.log('Main loadFeed: ', this.props)
+  //console.log('Main loadFeed: ', this.props)
 
   return fetch('http://honest-apps.eu-west-1.elasticbeanstalk.com/api/feed/' + teamId)
       .then((response) => response.json())

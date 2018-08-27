@@ -8,6 +8,8 @@ import { fetchTeams } from '../actions';
 //import AppNavigator from '../navigation'
 import { createStackNavigator } from 'react-navigation';
 
+import _ from 'lodash';
+
 // screen sizing
 const { width, height } = Dimensions.get('window');
 // orientation must fixed
@@ -25,11 +27,17 @@ export default class Settings extends React.Component<Props> {
   }
 
   componentWillReceiveProps(nextProps){
-    
+
+    // if(!_.isEmpty(nextProps.team))
+    // {
+    //   console.log('Settings componentWillReceiveProps:', nextProps);
+
+    //   this.props.navigation.navigate('MainScreen');
+    // }
   }
 
   componentDidMount() {
-    console.log('Settings componentDidMount:', this.props);
+    //console.log('Settings componentDidMount:', this.props);
     this.props.onTeamFetch();
   }
 
