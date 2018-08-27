@@ -103,7 +103,7 @@ let teamId;
         } 
       })
 
-console.log('Settings goPressHandler:', team.toString())
+//console.log('Settings goPressHandler:', team.toString())
 
    setTimeout(() => props.navigation.navigate('MainContainer'));
 }

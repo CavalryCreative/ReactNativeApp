@@ -10,6 +10,7 @@ export default class Comment extends React.Component {
   }
 
   render(){
+//console.log('Comment render: ', this.props.teamId, this.props.dataSource);
 
       if (!Array.isArray(this.props.dataSource) || !this.props.dataSource.length)
       {

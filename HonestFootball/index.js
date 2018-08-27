@@ -6,10 +6,14 @@ import { createStore, applyMiddleware  } from 'redux'
 import AppContainer from './containers/AppContainer'
 import honestFootballReducers from './reducers'
 
+import { YellowBox } from 'react-native';
+
 import thunk from 'redux-thunk';
 
+YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
+
 let store = createStore(honestFootballReducers, applyMiddleware(thunk))
-console.log(store.getState());
+//console.log(store.getState());
 
 class HonestFootball extends Component {
 	render() {
