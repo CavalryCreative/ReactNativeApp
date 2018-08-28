@@ -58,7 +58,7 @@ componentDidMount() {
 
         this.setState({
           isLoading: false,
-          dataSource: responseJson.Matches,
+          dataSource: responseJson,
           teamId: this.props.team,
         }, function(){
           

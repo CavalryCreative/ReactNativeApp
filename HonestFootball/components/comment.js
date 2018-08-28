@@ -3,41 +3,72 @@ import { Text, View, StyleSheet, ListView  } from 'react-native';
 import { globalStyle } from 'HonestFootball/components/app.style.js';
 import { teamColors } from 'HonestFootball/components/colors.style.js';
 
+import _ from 'lodash';
+
 export default class Comment extends React.Component {
 
   constructor(props){
     super(props);
+
+    this.state = {
+        BackgroundColor: this.props.dataSource.Teams[0].PrimaryColour,
+        TextColor: this.props.dataSource.Teams[0].SecondaryColour
+    };
+  }
+
+  componentDidMount() {
+         this.setState = {
+            BackgroundColor: this.props.dataSource.Teams[0].PrimaryColour,
+            TextColor: this.props.dataSource.Teams[0].SecondaryColour
+          }
   }
 
   render(){
 //console.log('Comment render: ', this.props.teamId, this.props.dataSource);
 
-      if (!Array.isArray(this.props.dataSource) || !this.props.dataSource.length)
+      if (!Array.isArray(this.props.dataSource.Matches) || !this.props.dataSource.Matches.length)
       {
         return(
-            <View>
-              <Text>No game today</Text>
-            </View>
+            <View style={styles.pageComments}>
+                         <View style={{flex: 10, backgroundColor: this.state.BackgroundColor}} >
+                            <Text style={styles.lrgComment}>No game today</Text>
+                      
+                        </View>
+                      </View>
         )
       }
       else
       {
-          if(this.props.dataSource[0].LatestEvent !== null)
+          if(this.props.dataSource.Matches[0].LatestEvent !== null)
           {
-              let homeTeamId = this.props.dataSource === undefined ? 'undefined' : this.props.dataSource[0].LatestEvent.HomeTeamAPIId.toString();
+              let homeTeamId = this.props.dataSource === undefined ? 'undefined' : this.props.dataSource.Matches[0].LatestEvent.HomeTeamAPIId.toString();
               let selectedTeamId = this.props.teamId.toString();
+
+              const scoreArr = _.split(this.props.dataSource.Matches[0].LatestEvent.Score, '-', 2);
+              const homeScore = _.take(scoreArr) + ' - ' + this.props.dataSource.Matches[0].HomeTeam;
+              const awayScore = _.takeRight(scoreArr) + ' - ' + this.props.dataSource.Matches[0].AwayTeam;
 
               if(homeTeamId === selectedTeamId)
               {
                  return (
                  
-                      <View style={styles.headerContainer}>
-                       <View style={{flex: 1, backgroundColor: 'powderblue'}} >
-                        <Text>{this.props.dataSource[0].LatestEvent.Minute}</Text>
+                     <View style={styles.pageComments}>
+
+                       <View style={styles.pageCommentsHead} >
+                            <View style={styles.timBox} >
+                                    <Text style={styles.label}>Time:</Text>
+                                    <Text style={styles.time}>{this.props.dataSource.Matches[0].LatestEvent.Minute}</Text>
+                            </View>
+                            <View style={styles.scoreBox} >
+                             <Text style={styles.label}>Scoreline:</Text>
+                                    <Text style={styles.scoreTeam}>{homeScore}</Text>
+                                   <Text style={styles.scoreTeam}>{awayScore}</Text>
+                            </View>
+
                         </View>
-                         <View style={{flex: 8, backgroundColor: 'skyblue'}} >
-                        <Text>{this.props.dataSource[0].LatestEvent.HomeComment}</Text>
-                        <Text>{this.props.dataSource[0].LatestEvent.Score}</Text>
+                         <View style={{flex: 10, backgroundColor: this.state.BackgroundColor}} >
+                            <Text style={styles.lrgComment}>{this.props.dataSource.Matches[0].LatestEvent.HomeComment}</Text>
+                      
                         </View>
                       </View>
                     );
@@ -51,17 +82,17 @@ export default class Comment extends React.Component {
                        <View style={styles.pageCommentsHead} >
                             <View style={styles.timBox} >
                                     <Text style={styles.label}>Time:</Text>
-                                    <Text style={styles.time}>{this.props.dataSource[0].LatestEvent.Minute}</Text>
+                                    <Text style={styles.time}>{this.props.dataSource.Matches[0].LatestEvent.Minute}</Text>
                             </View>
                             <View style={styles.scoreBox} >
                              <Text style={styles.label}>Scoreline:</Text>
-                                    <Text style={styles.scoreTeam}>{this.props.dataSource[0].LatestEvent.Score}</Text>
-                                   
+                                    <Text style={styles.scoreTeam}>{homeScore}</Text>
+                                   <Text style={styles.scoreTeam}>{awayScore}</Text>                                   
                             </View>
 
                         </View>
-                         <View style={{flex: 10, backgroundColor: '#b4281e'}} >
-                            <Text style={styles.lrgComment}>{this.props.dataSource[0].LatestEvent.AwayComment}</Text>
+                         <View style={{flex: 10, backgroundColor: this.state.BackgroundColor}} >
+                            <Text style={styles.lrgComment}>{this.props.dataSource.Matches[0].LatestEvent.AwayComment}</Text>
                       
                         </View>
                       </View>
@@ -98,8 +129,6 @@ const styles = StyleSheet.create({
   },
   pageComments:{
     flex:1,
-    
-    
     width:380,
   },
   pageCommentsHead:{
@@ -177,10 +206,6 @@ const styles = StyleSheet.create({
      paddingTop:0,
      marginBottom:0,
      paddingBottom:0,
-    
-   
-
-
   },
   red: {
     color: 'red',

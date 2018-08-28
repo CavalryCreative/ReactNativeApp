@@ -158,7 +158,7 @@ export default class Lineup extends React.Component {
 
   render(){
 
-  if (!Array.isArray(this.props.dataSource) || !this.props.dataSource.length)
+  if (!Array.isArray(this.props.dataSource.Matches) || !this.props.dataSource.Matches.length)
   {
     return(
          <View style={{flex: 1}}>  
@@ -171,33 +171,33 @@ export default class Lineup extends React.Component {
    return (
         <View style={{flex: 1, flexDirection: 'row'}}>  
             <View style={styles.leftitem}>
-              <Text>{this.props.dataSource[0].HomeTeam}</Text>
+              <Text>{this.props.dataSource.Matches[0].HomeTeam}</Text>
                <FlatList
                 scrollEnabled={false}
-                data={this.props.dataSource[0].HomeLineUp}
+                data={this.props.dataSource.Matches[0].HomeLineUp}
                 renderItem={this._renderStartLineup}
                 keyExtractor={(item, index) => index.toString()}
               />
               <Divider style={{ backgroundColor: 'blue' }} />
               <FlatList
               scrollEnabled={false}
-                data={this.props.dataSource[0].HomeLineUp}
+                data={this.props.dataSource.Matches[0].HomeLineUp}
                 renderItem={this._renderSubs}
                 keyExtractor={(item, index) => index.toString()}
               />
             </View>
             <View style={styles.rightitem}>
-            <Text>{this.props.dataSource[0].AwayTeam}</Text>
+            <Text>{this.props.dataSource.Matches[0].AwayTeam}</Text>
                <FlatList
                scrollEnabled={false}
-                data={this.props.dataSource[0].AwayLineUp}
+                data={this.props.dataSource.Matches[0].AwayLineUp}
                 renderItem={this._renderStartLineup}
                 keyExtractor={(item, index) => index.toString()}
               />
               <Divider style={{ backgroundColor: 'blue' }} />
               <FlatList
               scrollEnabled={false}
-                data={this.props.dataSource[0].AwayLineUp}
+                data={this.props.dataSource.Matches[0].AwayLineUp}
                 renderItem={this._renderSubs}
                 keyExtractor={(item, index) => index.toString()}
               />
