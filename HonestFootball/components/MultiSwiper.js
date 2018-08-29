@@ -43,8 +43,7 @@ export default class RSwiper extends React.Component {
             </View>
 
             <View style={styles.slide3}>
-              <Stats dataSource = {this.props.dataSource} />
-              <Text style={styles.text}>Share</Text>
+              <Stats dataSource = {this.props.dataSource} teamId={this.props.teamId} />
             </View>
           </Swiper> 
 
