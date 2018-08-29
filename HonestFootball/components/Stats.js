@@ -1,6 +1,8 @@
 import React from 'react';
 import { Text, View, ListView, Dimensions, StyleSheet, Platform  } from 'react-native';
 
+import _ from 'lodash';
+
 const { width, height } = Dimensions.get('window');
 
 let homeBackgroundColor = '#ffffff';
@@ -19,36 +21,43 @@ export default class Stats extends React.Component {
 selectedTeamBackgroundColor = this.props.dataSource.Teams[0].PrimaryColour;
 selectedTeamTextColor = this.props.dataSource.Teams[0].SecondaryColour;
 
-if(this.props.dataSource.Matches[0].LatestEvent !== null)
+if (!Array.isArray(this.props.dataSource.Matches) || !this.props.dataSource.Matches.length)
 {
-  if(this.props.teamId.toString() === this.props.dataSource.Matches[0].LatestEvent.HomeTeamAPIId.toString())
+        
+}
+else
+{
+  if(this.props.dataSource.Matches[0].LatestEvent !== null)
   {
-    //console.log('Stats constructor: ', this.props.teamId, this.props.dataSource.Matches[0].LatestEvent.HomeTeamAPIId);
-    //Have to switch selected team primary/secondary colours so as to contrast with background
-    homeBackgroundColor = this.props.dataSource.Matches[0].HomeTeamSecondaryColour;
-    homeTextColor = this.props.dataSource.Matches[0].HomeTeamPrimaryColour;
-    awayBackgroundColor = this.props.dataSource.Matches[0].AwayTeamPrimaryColour;
-    awayTextColor = this.props.dataSource.Matches[0].AwayTeamSecondaryColour;
-    titleTextColor = this.props.dataSource.Matches[0].HomeTeamSecondaryColour;
-  }
-  else
-  {
-    homeBackgroundColor = this.props.dataSource.Matches[0].HomeTeamPrimaryColour;
-    homeTextColor = this.props.dataSource.Matches[0].HomeTeamSecondaryColour;
-    awayBackgroundColor = this.props.dataSource.Matches[0].AwayTeamSecondaryColour;;
-    awayTextColor = this.props.dataSource.Matches[0].AwayTeamPrimaryColour;
-    titleTextColor = this.props.dataSource.Matches[0].AwayTeamSecondaryColour;
+    if(this.props.teamId.toString() === this.props.dataSource.Matches[0].LatestEvent.HomeTeamAPIId.toString())
+    {
+      //console.log('Stats constructor: ', this.props.teamId, this.props.dataSource.Matches[0].LatestEvent.HomeTeamAPIId);
+      //Have to switch selected team primary/secondary colours so as to contrast with background
+      homeBackgroundColor = this.props.dataSource.Matches[0].HomeTeamSecondaryColour;
+      homeTextColor = this.props.dataSource.Matches[0].HomeTeamPrimaryColour;
+      awayBackgroundColor = this.props.dataSource.Matches[0].AwayTeamPrimaryColour;
+      awayTextColor = this.props.dataSource.Matches[0].AwayTeamSecondaryColour;
+      titleTextColor = this.props.dataSource.Matches[0].HomeTeamSecondaryColour;
+    }
+    else
+    {
+      homeBackgroundColor = this.props.dataSource.Matches[0].HomeTeamPrimaryColour;
+      homeTextColor = this.props.dataSource.Matches[0].HomeTeamSecondaryColour;
+      awayBackgroundColor = this.props.dataSource.Matches[0].AwayTeamSecondaryColour;;
+      awayTextColor = this.props.dataSource.Matches[0].AwayTeamPrimaryColour;
+      titleTextColor = this.props.dataSource.Matches[0].AwayTeamSecondaryColour;
+    }
   }
 }
 
      this.state = {
         HomeBackgroundColor: homeBackgroundColor,
-        HomeTextColor: homeTextColor,
-        AwayBackgroundColor: awayBackgroundColor,
-        AwayTextColor: awayTextColor,
-        SelectedTeamBackgroundColor: selectedTeamBackgroundColor,
-        SelectedTeamTextColor: selectedTeamTextColor,
-        TitleTextColor: titleTextColor
+            HomeTextColor: homeTextColor,
+            AwayBackgroundColor: awayBackgroundColor,
+            AwayTextColor: awayTextColor,
+            SelectedTeamBackgroundColor: selectedTeamBackgroundColor,
+            SelectedTeamTextColor: selectedTeamTextColor,
+            TitleTextColor: titleTextColor
     };
   }
 
@@ -70,7 +79,7 @@ if(this.props.dataSource.Matches[0].LatestEvent !== null)
     {
         return(
             <View>
-              <Text>No game today</Text>
+              <Text>Still no game today</Text>
             </View>
         )
     }
@@ -162,7 +171,7 @@ if(this.props.dataSource.Matches[0].LatestEvent !== null)
         {
            return(
                   <View>
-                    <Text>Something cocked up</Text>
+                    <Text>Check back later</Text>
                   </View>
               )
         }

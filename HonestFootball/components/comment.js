@@ -28,11 +28,46 @@ export default class Comment extends React.Component {
 
       if (!Array.isArray(this.props.dataSource.Matches) || !this.props.dataSource.Matches.length)
       {
+        let rnd = _.random(5);
+        let message;
+
+        console.log('Message: ', rnd)
+
+        switch(rnd) { 
+            case 0: { 
+              message = 'No game today dickhead'; 
+              break; 
+           } 
+           case 1: { 
+              message = 'Still no game today'; 
+              break; 
+           } 
+           case 2: { 
+              message = 'No game today'; 
+              break; 
+           } 
+           case 3: { 
+              message = 'No game today tool'; 
+              break; 
+           } 
+           case 4: { 
+              message = 'No game today dogbreath'; 
+              break; 
+           } 
+           case 5: { 
+              message = 'No game today jim'; 
+              break; 
+           } 
+           default: { 
+              message = 'No game today dickhead'; 
+              break; 
+           } 
+        }
+        
         return(
             <View style={styles.pageComments}>
                          <View style={{flex: 10, backgroundColor: this.state.BackgroundColor}} >
-                            <Text style={styles.lrgComment}>No game today</Text>
-                      
+                            <Text style={styles.lrgComment}>{message}</Text>                    
                         </View>
                       </View>
         )
@@ -101,11 +136,13 @@ export default class Comment extends React.Component {
           }
           else
           {
-              return(
-                  <View>
-                    <Text>Something cocked up</Text>
-                  </View>
-              )
+             return(
+            <View style={styles.pageComments}>
+                <View style={{flex: 10, backgroundColor: this.state.BackgroundColor}} >
+                    <Text style={styles.lrgComment}>Check back later</Text>                     
+                </View>
+            </View>
+        )
           }
       }
   }
