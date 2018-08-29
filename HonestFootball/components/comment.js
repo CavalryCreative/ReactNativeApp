@@ -31,8 +31,6 @@ export default class Comment extends React.Component {
         let rnd = _.random(5);
         let message;
 
-        console.log('Message: ', rnd)
-
         switch(rnd) { 
             case 0: { 
               message = 'No game today dickhead'; 
@@ -63,7 +61,7 @@ export default class Comment extends React.Component {
               break; 
            } 
         }
-        
+
         return(
             <View style={styles.pageComments}>
                          <View style={{flex: 10, backgroundColor: this.state.BackgroundColor}} >
