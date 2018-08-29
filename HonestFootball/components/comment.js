@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
     flex: 2, 
     flexDirection: 'row',
     backgroundColor: 'white', 
-    marginTop:30,
+    marginTop:0,
     marginBottom:0,
   },
 
