@@ -25,7 +25,7 @@ componentDidMount() {
 //console.log('Main componentDidMount: ', this.props.team);
 
   setTimeout(() => this.loadFeed(), 50);
-  this.timer = setInterval(()=> this.loadFeed(''), 60000);
+  this.timer = setInterval(()=> this.loadFeed(''), 30000);
   }
 
    constructor(props){
